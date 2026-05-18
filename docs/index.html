@@ -536,10 +536,26 @@
 
     <h3><span class="step-num">3</span>사내 문서 ingest + 검색</h3>
     <div class="track instr">
-      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
-      <pre style="white-space: pre-wrap;">"내 사내 문서 폴더 [경로]를 OpenCrab에 ingest하고 '환불 처리' 검색해서 매칭 문서 알려줘"</pre>
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장 · 패턴 B)</div>
+      <pre style="white-space: pre-wrap;">"내 사내 문서 폴더 [경로] 읽어서 entity·관계 뽑은 다음, ontology_add_node·add_edge로 OpenCrab에 넣어줘. 끝나면 '환불 처리' 검색해서 결과 알려줘"</pre>
     </div>
-    <p style="font-size: 13px; color: var(--muted);">AI가 <code class="inline">ontology_ingest</code> · <code class="inline">ontology_extract</code> · <code class="inline">ontology_query</code> 자동 chain.</p>
+
+    <table>
+      <thead><tr><th>패턴</th><th>entity 추출 주체</th><th>API key</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>A. <code class="inline">ontology_extract</code></td>
+          <td>OpenCrab 내부 LLM 호출</td>
+          <td>별도 필요 (OpenAI/Ollama 설정에 따라)</td>
+        </tr>
+        <tr>
+          <td><strong>B. Copilot CLI 자체 모델 (권장)</strong></td>
+          <td>Copilot CLI가 추출 → <code class="inline">add_node</code>·<code class="inline">add_edge</code>로 전달</td>
+          <td><strong>추가 X · 구독 안에서 처리</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 13px; color: var(--muted);">→ <code class="inline">ontology_extract</code>는 강사 시연만, 학습자는 패턴 B 권장. 청킹·임베딩은 OpenCrab Chroma store가 자동 처리.</p>
 
     <h3><span class="step-num">4</span>9단계 본인 도메인 ontology 모델링</h3>
     <p>본인 업무 도메인 1개 선택 (POS 운영 / Jira 티켓 / Confluence 매뉴얼 / 이메일 / 일정 등 무엇이든). 9 step:</p>
