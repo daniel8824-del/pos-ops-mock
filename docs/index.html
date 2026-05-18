@@ -190,18 +190,18 @@
       </div>
       <div class="day-cell">
         <span class="day-time">10:00 – 11:00 (60분)</span>
-        <div class="ttl">14차시 | 훅 자동화</div>
-        <div class="desc">PreToolUse 가드레일 · PostToolUse 알림 · SessionStart brief. 운영팀 안전 장치.</div>
+        <div class="ttl">14차시 | MCP 고도화</div>
+        <div class="desc">본인 회사 고민 매핑 + tool · resource · prompt 슬롯 채우기 + 운영 한계 5가지.</div>
       </div>
       <div class="day-cell">
         <span class="day-time">11:00 – 12:00 (60분)</span>
-        <div class="ttl">15차시 | 멀티에이전트</div>
-        <div class="desc">4 패턴 | 오케스트레이터 · Agent Teams · 멀티터미널 · 전문가 위원회. cmux 데모.</div>
+        <div class="ttl">15차시 | 멀티 언급 + 로컬 RAG · 온톨로지</div>
+        <div class="desc">멀티에이전트 4 패턴 짧게. 사내 문서 QMD 인덱싱 + yucrates MCP 9단계 개인 온톨로지 (본인 도메인).</div>
       </div>
       <div class="day-cell">
         <span class="day-time">12:00 – 13:00 (60분)</span>
-        <div class="ttl">16차시 | 운영 대시보드 PoC</div>
-        <div class="desc">E2E·TDD + POS 운영 모니터링 대시보드 + QMD 매뉴얼 청킹 검색.</div>
+        <div class="ttl">16차시 | 인프라 모니터링 + 훅</div>
+        <div class="desc">AI Agent 연동 실시간 관제 사례. PreToolUse · PostToolUse · SessionStart 훅 실습 + HTML 대시보드.</div>
       </div>
     </div>
 
@@ -304,172 +304,237 @@
 </section>
 
 
-<!-- ============ 14차시 훅 ============ -->
+<!-- ============ 14차시 MCP 고도화 ============ -->
 <section id="ch14">
   <div class="container">
     <span class="section-tag">§ 14차시 · 10:00 ~ 11:00 (60분)</span>
-    <h2><span class="accent">훅 자동화</span> | 운영팀 가드레일</h2>
+    <h2><span class="accent">MCP 고도화</span> | 본인 회사 고민 직접 매핑</h2>
 
     <div class="goal">
       <div class="goal-label">학습 목표</div>
-      <div class="goal-text">훅 3종 (<strong>PreToolUse · PostToolUse · SessionStart</strong>)으로 운영 가드레일·자동 알림·세션 brief를 시연. 학습자 본인 settings.json에 복사 1줄로 작동.</div>
+      <div class="goal-text">13차시에서 설치한 pos-ops MCP를 <strong>본인 회사 고민에 맞춰 직접 확장</strong>. tool · resource · prompt 3 슬롯 중 1개 이상 채우기 + 운영 한계 5가지 인지.</div>
+    </div>
+
+    <h3><span class="step-num">1</span>본인 회사 고민 1개 매핑 (10분)</h3>
+    <p>학습자가 본인 환경의 한 가지 고민을 종이/메모에 5분 작성. 강사 예시 4개와 비교:</p>
+    <table>
+      <thead><tr><th>고민</th><th>어느 슬롯에 박나</th><th>예시 함수/안내</th></tr></thead>
+      <tbody>
+        <tr><td>Jira 운영 티켓 자동 분류</td><td>tool</td><td><code class="inline">classify_ticket(jira_id)</code></td></tr>
+        <tr><td>Confluence 매뉴얼 검색</td><td>tool + resource</td><td><code class="inline">search_confluence(q)</code> + 매뉴얼 직접 노출</td></tr>
+        <tr><td>Oracle POS DB 조회</td><td>tool</td><td><code class="inline">query_pos_db(sql)</code></td></tr>
+        <tr><td>Playwright API 자동 테스트</td><td>tool</td><td><code class="inline">run_e2e(suite)</code></td></tr>
+      </tbody>
+    </table>
+
+    <h3><span class="step-num">2</span>실습 ① | 새 tool 추가 (15분)</h3>
+    <p>본인 고민 1개 골라서 <code class="inline">@mcp.tool()</code> 데코레이터로 함수 추가:</p>
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre style="white-space: pre-wrap;">"내 pos-ops MCP에 [본인 도구 이름] 조회 tool 추가해줘. 함수명·인자·반환값은 [회사 API 예시]에 맞춰서."</pre>
+    </div>
+    <pre style="margin-top: 10px;">@mcp.tool()
+def classify_ticket(jira_id: str) -> dict:
+    """Jira 티켓을 카테고리(payment/device/inventory/network)로 분류."""
+    # 회사 Jira API 또는 mock 응답
+    return {"jira_id": jira_id, "category": "payment", "confidence": 0.92}</pre>
+
+    <h3><span class="step-num">3</span>실습 ② | resource 슬롯 채우기 (10분)</h3>
+    <p>현재 비워둔 resource 슬롯에 <strong>회사 운영 매뉴얼·임계값·스키마</strong>를 노출. AI가 자동으로 컨텍스트로 가져감.</p>
+    <pre>@mcp.resource("file:///path/to/manual.md")
+def runbook() -> str:
+    """POS 운영 매뉴얼 (Confluence export 또는 사내 .md)."""
+    return open("manual.md").read()</pre>
+    <p style="font-size: 13px; color: var(--muted);">→ rag-day3 QMD와 차이: QMD는 로컬 노트 검색용, MCP resource는 AI가 tool 호출 시 자동 참조하는 컨텍스트.</p>
+
+    <h3><span class="step-num">4</span>실습 ③ | prompt 슬롯에 스킬 박기 (10분)</h3>
+    <p>Claude Code 스킬과 동일 역할 — AI에게 "이렇게 행동해라" 안내 템플릿. MCP 1 패키지 안에 통합 배포:</p>
+    <pre>@mcp.prompt()
+def anomaly_triage() -> str:
+    """이상 탐지 → 진단 → 티켓 5단계 흐름."""
+    return """
+    1. detect_anomaly(window_min=60)
+    2. 임계 초과 시 매뉴얼 §섹션 검색
+    3. 유사 과거 티켓 3건 조회
+    4. create_ticket(P1~P3, body=매뉴얼 인용 + 사례)
+    5. 알림 채널 전송
+    """</pre>
+
+    <h3><span class="step-num">5</span>운영 한계 · 고민 사례 (15분)</h3>
+    <table>
+      <thead><tr><th>한계</th><th>도시바·아모레 환경 적용 시 고민</th></tr></thead>
+      <tbody>
+        <tr><td><strong>토큰 폭주</strong></td><td>tool chain이 깊어지면 비용 + 컨텍스트 폭주 → Caveman/RTK · model 라우팅으로 절감</td></tr>
+        <tr><td><strong>인증</strong></td><td>사내 API OAuth · API key · 사용자 위임 — 어떻게 안전하게 보관</td></tr>
+        <tr><td><strong>권한</strong></td><td>모두 같은 tool 호출 가능? 운영자/관전자 분리 (PreToolUse 가드)</td></tr>
+        <tr><td><strong>사내망 격리</strong></td><td>stdio MCP 외 remote (HTTP) MCP는 사내망에서 어떻게 — VPN 게이트웨이</td></tr>
+        <tr><td><strong>가드레일 누락</strong></td><td>AI가 잘못된 인자 호출 → 실제 운영 사고 (DB 수정 · 외부 알림 폭주)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="check-list">
+      <h4>✓ 14차시 체크포인트</h4>
+      <ul>
+        <li>본인 회사 고민 → MCP 슬롯 매핑 결과 1개</li>
+        <li>tool / resource / prompt 중 1개 직접 추가 + 동작 확인</li>
+        <li>운영 한계 5가지 인지 (토큰 · 인증 · 권한 · 사내망 · 가드레일)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ 15차시 멀티 언급 + 로컬 RAG + 온톨로지 ============ -->
+<section id="ch15">
+  <div class="container">
+    <span class="section-tag">§ 15차시 · 11:00 ~ 12:00 (60분)</span>
+    <h2><span class="accent">멀티 언급 + 로컬 RAG · 9단계 개인 온톨로지</span></h2>
+
+    <div class="goal">
+      <div class="goal-label">학습 목표</div>
+      <div class="goal-text">멀티에이전트 4 패턴 <strong>언급만</strong> (하네스 + MCP 잘 만들면 자연 해결). 그 시간 위에 <strong>사내 문서 → QMD 인덱싱</strong> (Day 3 재방문) + <strong>yucrates(OpenCrab) MCP 복제 후 본인 업무 도메인 9단계 개인 온톨로지</strong> 직접 모델링.</div>
+    </div>
+
+    <h3><span class="step-num">1</span>멀티에이전트 4 패턴 — 언급만 (15분)</h3>
+    <table>
+      <thead><tr><th>패턴</th><th>한 줄</th><th>예시 도구</th></tr></thead>
+      <tbody>
+        <tr><td>① 오케스트레이터</td><td>1 메인 + N sub. 계획 모델 + 실행 모델 분리</td><td>Claude Code subagent</td></tr>
+        <tr><td>② Agent Teams</td><td>공유 태스크 리스트 · 메일박스 협업</td><td>CrewAI · LangGraph</td></tr>
+        <tr><td>③ 멀티터미널</td><td>tmux 탭별 독립 에이전트</td><td>cmux</td></tr>
+        <tr><td>④ 전문가 위원회</td><td>여러 모델 의견 → 합의/투표</td><td>codex challenge</td></tr>
+      </tbody>
+    </table>
+    <div class="reference">
+      <p>본 강의에서 <strong>서브에이전트 · 팀 체제는 깊이 다루지 않음</strong>. 하네스(13·14차시 MCP) + 명확한 도구 정의가 우선 — 그 위에 멀티 패턴은 자연 합류. 깊이 들어가는 건 별도 워크숍 권장.</p>
+    </div>
+
+    <h3><span class="step-num">2</span>로컬 RAG 재방문 | 사내 문서 QMD 인덱싱 (15분)</h3>
+    <p>Day 3 9차시에서 설치한 QMD를 사내 문서로 다시. Confluence export · 운영 매뉴얼 PDF · 과거 티켓 archive 등 어떤 형태든 마크다운으로 변환 후 인덱싱:</p>
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre style="white-space: pre-wrap;">"내 사내 문서 폴더 [경로]를 [컬렉션이름] 컬렉션으로 QMD에 등록하고 인덱싱한 다음, 'POS 단말 다운 해결' 검색해서 어떤 문서가 매칭되는지 알려줘"</pre>
+    </div>
+    <p style="font-size: 13px; color: var(--muted);">→ 인덱싱이 끝나면 MCP의 resource 슬롯(14차시 §3)에 동일 폴더를 노출 → AI가 tool 호출 시 자동 컨텍스트 가져감. 두 layer가 합쳐짐.</p>
+
+    <h3><span class="step-num">3</span>yucrates(OpenCrab) MCP 복제 (10분)</h3>
+    <p>강사 본인 yucrates 원본을 복제해서 학습자 환경 또는 사내용으로 변형. 학술적 메타-온톨로지 (canonicalize · promotion · schema_pack · identity) 노출 X — <strong>9단계 개인 모델링만 사용</strong>:</p>
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre style="white-space: pre-wrap;">"github 의 OpenCrab MCP repo clone 한 다음, 내 환경용으로 단순화(canonicalize·promotion·schema_pack·identity 비활성)해서 ontology_query / ontology_impact / add_node / add_edge 4 tool만 노출하게 wrapper 만들어줘. 내 MCP 설정 파일에 등록까지."</pre>
+    </div>
+
+    <h3><span class="step-num">4</span>9단계 개인 온톨로지 — 본인 도메인 (20분)</h3>
+    <p>학습자가 <strong>본인 업무 도메인을 직접 선택</strong>. POS 운영, Jira 티켓, Confluence 매뉴얼, 사내 프로젝트 관리, 일정·이메일 — 어느 영역이든 가능. 9 step 진행:</p>
+    <table>
+      <thead><tr><th>step</th><th>작업</th><th>예시 (학습자 도메인 1)</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>도메인 결정</td><td>"운영 티켓 자동 분류"</td></tr>
+        <tr><td>2</td><td>entity 후보 5~9개 추출</td><td>Ticket · Reporter · Assignee · Category · Status · Priority</td></tr>
+        <tr><td>3</td><td>관계 후보 3~7개</td><td>Reporter—creates→Ticket · Assignee—handles→Ticket · Ticket—has→Category</td></tr>
+        <tr><td>4</td><td>한 줄 명세</td><td>각 node/edge "이건 무엇" 한 줄 설명</td></tr>
+        <tr><td>5</td><td>YAML 작성</td><td>yucrates ingest 형식</td></tr>
+        <tr><td>6</td><td><code class="inline">ontology_ingest(yaml)</code></td><td>강사 instance 또는 본인 인스턴스</td></tr>
+        <tr><td>7</td><td><code class="inline">ontology_query("...")</code></td><td>자연어 → 그래프 traversal</td></tr>
+        <tr><td>8</td><td>회사 도구 연동</td><td>Jira ticket ID · Confluence page ID를 node 속성으로 연결</td></tr>
+        <tr><td>9</td><td>MCP 통합</td><td>이 ontology를 14차시 MCP resource 슬롯에 노출 → AI 자동 참조</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size: 14px; color: var(--muted);"><strong>도메인 다양화 안내</strong> | POS만의 예시 X. 학습자 본인 일상 업무 영역 — 일정 관리 / 이메일 분류 / 코드 리뷰 / 사내 위키 / 고객 문의 / 프로젝트 일정 — 무엇이든 9 step 동일.</p>
+
+    <div class="field-case">
+      이 9단계는 <strong>학술 온톨로지가 아닌 운영 모델링</strong>. 회사 도메인을 AI가 이해할 수 있게 노드·관계로 정리하면, MCP tool 호출 시 의미 layer가 자동 합류 — "강남역 매장 결제 실패" 한 줄에서 영향 받는 entity·티켓·매뉴얼·담당자가 한 번에 traversal.
+    </div>
+
+    <div class="check-list">
+      <h4>✓ 15차시 체크포인트</h4>
+      <ul>
+        <li>멀티에이전트 4 패턴 인지 (서브에이전트·팀 깊이 X)</li>
+        <li>사내 문서 QMD 컬렉션 1개 인덱싱 + 검색 동작</li>
+        <li>본인 업무 도메인 9단계 ontology YAML 1개 작성</li>
+        <li><code class="inline">ontology_query</code> 자연어 질문 1건 실행 성공</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ 16차시 인프라 모니터링 + 훅 ============ -->
+<section id="ch16">
+  <div class="container">
+    <span class="section-tag">§ 16차시 · 12:00 ~ 13:00 (60분)</span>
+    <h2><span class="accent">인프라 모니터링</span> | AI Agent 실시간 관제 + 훅 자동화</h2>
+
+    <div class="goal">
+      <div class="goal-label">학습 목표</div>
+      <div class="goal-text">원래 요구사항 ③ <strong>"인프라 모니터링을 AI 개발 Tool 또는 Agent와 연동하여 실시간 관제하여 활용한 사례"</strong>를 한 사이클로 시연. <strong>훅 3종</strong> (PreToolUse · PostToolUse · SessionStart) + HTML 대시보드 + 매뉴얼 자동 인용.</div>
     </div>
 
     <h3><span class="step-num">1</span>훅 3 종류 + 발동 시점</h3>
     <table>
       <thead><tr><th>종류</th><th>시점</th><th>역할</th></tr></thead>
       <tbody>
-        <tr><td><strong>PreToolUse</strong></td><td>tool 호출 <em>직전</em></td><td>가드레일 | 위험 인자·짧은 제목·중복 차단</td></tr>
-        <tr><td><strong>PostToolUse</strong></td><td>tool 호출 <em>직후</em></td><td>알림·후속 작업 | 임계 초과 시 webhook</td></tr>
-        <tr><td><strong>SessionStart</strong></td><td>세션 시작 시점</td><td>brief | 어제 운영 요약 자동 출력</td></tr>
+        <tr><td><strong>PreToolUse</strong></td><td>tool 호출 <em>직전</em></td><td>가드레일 · 위험 인자 · 짧은 제목 · 중복 차단</td></tr>
+        <tr><td><strong>PostToolUse</strong></td><td>tool 호출 <em>직후</em></td><td>알림 · 후속 작업 · 임계 초과 시 webhook</td></tr>
+        <tr><td><strong>SessionStart</strong></td><td>세션 시작 시점</td><td>brief · 어제 운영 요약 자동 출력</td></tr>
       </tbody>
     </table>
 
-    <h3><span class="step-num">2</span>실습 ① | hooks.json 복사</h3>
-    <pre># 본인 settings.json 의 hooks 섹션에 추가
-{
-  "hooks": {
-    "PreToolUse": [{
-      "matcher": "mcp__pos-ops__create_ticket",
-      "hooks": [{"type":"command","command":"python3 $POS_OPS_ROOT/hooks/guard_ticket.py"}]
-    }],
-    "PostToolUse": [{
-      "matcher": "mcp__pos-ops__detect_anomaly",
-      "hooks": [{"type":"command","command":"python3 $POS_OPS_ROOT/hooks/on_anomaly.py"}]
-    }],
-    "SessionStart": [{
-      "hooks": [{"type":"command","command":"python3 $POS_OPS_ROOT/hooks/morning_brief.py"}]
-    }]
-  }
-}</pre>
+    <h3><span class="step-num">2</span>실습 ① | hooks.json 본인 환경 복사</h3>
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre style="white-space: pre-wrap;">"내 MCP 설정 파일의 hooks 섹션에 pos-ops-mcp/hooks/hooks.json 내용 추가해줘. PreToolUse·PostToolUse·SessionStart 3종, POS_OPS_ROOT 환경변수는 내 repo 경로로."</pre>
+    </div>
 
-    <h3><span class="step-num">3</span>실습 ② | 가드레일 | 짧은 제목 차단</h3>
+    <h3><span class="step-num">3</span>실습 ② | PreToolUse 가드레일 검증</h3>
     <pre># 짧은 title은 자동 거부
 echo '{"tool_args":{"title":"ab","body":"."}}' | \
   python3 hooks/guard_ticket.py
 # → {"decision":"block","reason":"title 너무 짧음 (2자) | 5자 이상 필요"}
 # → exit 2 (Claude Code 표준 block code)</pre>
 
-    <h3><span class="step-num">4</span>실습 ③ | 자동 알림 | 임계 초과</h3>
+    <h3><span class="step-num">4</span>실습 ③ | PostToolUse 자동 알림 검증</h3>
     <pre>echo '{"tool_result":{"top_issue":"POS_DOWN","anomalies":{"POS_DOWN":15}}}' | \
   python3 hooks/on_anomaly.py
-# 🚨 [HOOK] POS 운영 알림 | TOP ISSUE POS_DOWN (15건)
+# 🚨 [HOOK] POS 운영 알림 · TOP ISSUE POS_DOWN (15건)
 #   영향 매장: ['SEL-001']
 #   권장: anomaly-triage skill 실행 또는 create_ticket 호출</pre>
 
-    <h3><span class="step-num">5</span>실습 ④ | SessionStart | 어제 brief</h3>
+    <h3><span class="step-num">5</span>실습 ④ | SessionStart morning brief</h3>
     <pre>python3 hooks/morning_brief.py
-# ☀ [HOOK] Morning Brief | 2026-05-13
+# ☀ [HOOK] Morning Brief · 2026-05-13
 #   거래 8,181 · 매출 ₩347,640,500 · 이상 12.9%
 #   주의 매장 Top 3 (이상 비율):
-#     - GYG-001  14.5% (113/777)
-#     - SEL-001  14.1% (128/908)
-#     - ICN-001  13.5% (108/802)</pre>
+#     · GYG-001  14.5% (113/777)
+#     · SEL-001  14.1% (128/908)
+#     · ICN-001  13.5% (108/802)</pre>
 
-    <div class="check-list">
-      <h4>✓ 14차시 체크포인트</h4>
-      <ul>
-        <li>guard_ticket → 짧은 title block 동작 (exit 2)</li>
-        <li>on_anomaly → 임계 초과 시 stdout 알림 / 미만 시 silent</li>
-        <li>morning_brief → 어제 매장 Top 3 출력</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============ 15차시 멀티에이전트 ============ -->
-<section id="ch15">
-  <div class="container">
-    <span class="section-tag">§ 15차시 · 11:00 ~ 12:00 (60분)</span>
-    <h2><span class="accent">멀티에이전트</span> | 4 패턴 + cmux 데모</h2>
-
-    <div class="goal">
-      <div class="goal-label">학습 목표</div>
-      <div class="goal-text">멀티에이전트 <strong>4 대표 패턴</strong>의 차이와 적정 복잡도. 본인 환경에서 cmux 멀티플렉서로 터미널 탭별 에이전트 동시 운용 데모.</div>
-    </div>
-
-    <h3><span class="step-num">1</span>4 패턴 비교</h3>
-    <table>
-      <thead><tr><th>패턴</th><th>특징</th><th>예시 도구</th></tr></thead>
-      <tbody>
-        <tr><td><strong>① 오케스트레이터</strong></td><td>1 메인 + N sub. 강한 모델 계획 + 빠른 모델 실행</td><td>Claude Code subagent</td></tr>
-        <tr><td><strong>② Agent Teams</strong></td><td>공유 태스크 리스트 · 메일박스 협업</td><td>CrewAI · LangGraph</td></tr>
-        <tr><td><strong>③ 멀티터미널</strong></td><td>tmux 탭별 독립 에이전트. 사람이 직접 관전</td><td>cmux</td></tr>
-        <tr><td><strong>④ 전문가 위원회</strong></td><td>여러 모델 의견 → 합의 또는 투표</td><td>codex challenge</td></tr>
-      </tbody>
-    </table>
-
-    <h3><span class="step-num">2</span>실습 | cmux 4 탭 데모</h3>
-    <pre># 탭 1: 탐지 에이전트 (claude code · sonnet)
-$ claude --skill anomaly-triage
-
-# 탭 2: 매뉴얼 검색 에이전트 (copilot cli)
-$ copilot --skill qmd-search
-
-# 탭 3: 티켓 작성 에이전트 (claude code · haiku)
-$ claude --skill ticket-draft
-
-# 탭 4: 대시보드 모니터링 (codex cli)
-$ codex run dashboard/monitor.py</pre>
-
-    <div class="reference">
-      <p>이 패턴은 <strong>강사 시연</strong>. 학습자는 본인 환경 도구 사정에 맞춰 1-2개 탭부터 시작 권장. 단독 에이전트 동작이 안정된 후 멀티 진입.</p>
-    </div>
-
-    <div class="check-list">
-      <h4>✓ 15차시 체크포인트</h4>
-      <ul>
-        <li>4 패턴 차이 설명 가능 (오케스트레이터 vs Teams vs 터미널 vs 위원회)</li>
-        <li>본인 환경 적정 복잡도 1-2 단계 결정</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============ 16차시 운영 모니터링 ============ -->
-<section id="ch16">
-  <div class="container">
-    <span class="section-tag">§ 16차시 · 12:00 ~ 13:00 (60분)</span>
-    <h2><span class="accent">운영 모니터링 PoC</span> | 대시보드 + 매뉴얼 청킹</h2>
-
-    <div class="goal">
-      <div class="goal-label">학습 목표</div>
-      <div class="goal-text"><strong>① 운영 매뉴얼 PDF → QMD 청킹·인덱싱</strong> → 검색이 가능해지면 <strong>② AI가 티켓 답변 초안</strong>에 매뉴얼 §섹션 자동 인용 → <strong>③ HTML 대시보드</strong>로 시각화. Day 3 QMD 그대로 재사용.</div>
-    </div>
-
-    <h3><span class="step-num">1</span>실습 ① | 운영 매뉴얼 QMD ingest</h3>
-    <pre># Day 3 9차시에서 설치한 QMD 재사용
-qmd collection add pos-manuals /path/to/pos-ops-mock/manuals
-qmd update
-qmd query "POS 단말 다운 해결" -c pos-manuals
-# → §3.1 POS 단말 응답 없음 (POS_DOWN) 섹션 상위 매칭</pre>
-
-    <h3><span class="step-num">2</span>실습 ② | AI가 매뉴얼 인용해서 답변 초안</h3>
-    <pre>"POS_DOWN 강남역점 30분째.
-매뉴얼 §3 조치 절차 인용하고 P1으로 티켓 만들어줘"
-
-# 자동:
-#   1. qmd query "POS_DOWN" → §3.1 조치 5단계 인용
-#   2. create_ticket(title, body=[매뉴얼 §3.1 + 조치 1순위], P1)
-#   3. on_anomaly hook → 자동 알림 발송</pre>
-
-    <h3><span class="step-num">3</span>실습 ③ | HTML 대시보드 PoC</h3>
+    <h3><span class="step-num">6</span>실습 ⑤ | HTML 대시보드 + 자연어 한 줄 5단계 chain</h3>
     <p>매장별 KPI · 시간대별 거래 · 이상 유형 분포 · 미해결 티켓 한눈에. <a href="dashboard.html">→ 대시보드 보기</a></p>
-    <pre># 본 mock 대시보드 (Chart.js · 단일 HTML)
-xdg-open dashboard/index.html  # Linux
-start dashboard\index.html      # Windows</pre>
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre style="white-space: pre-wrap;">"POS_DOWN 강남역점 30분째. 매뉴얼 §3 조치 절차 인용하고 P1으로 티켓 만들어줘"</pre>
+    </div>
+    <pre>자동 chain (MCP + Hook + QMD 합작):
+  1. detect_anomaly(window_min=30, store="SEL-001") → top_issue=POS_DOWN
+  2. qmd query "POS_DOWN 조치" → 매뉴얼 §3.1 5단계 인용
+  3. PreToolUse guard_ticket → title 5자 이상 / P1 body 30자 이상 검증
+  4. create_ticket(title, body=매뉴얼 인용+사례, priority=P1)
+  5. PostToolUse on_anomaly → 자동 알림 (stdout · Discord webhook)</pre>
 
     <div class="field-case">
-      Day 4 산출물 | <strong>"본인 Copilot CLI 한 줄 → 5 단계 자동 chain"</strong>. 탐지 (MCP) → 가드 (Hook) → 매뉴얼 검색 (QMD) → 티켓 생성 (MCP) → 알림 (Hook). 외부 API 0건, 데이터 외부 유출 0건.
+      Day 4 산출물 · <strong>"본인 Copilot CLI 한 줄 → 5단계 자동 chain"</strong>. 탐지 (MCP) → 매뉴얼 검색 (QMD) → 가드 (Hook PreToolUse) → 티켓 생성 (MCP) → 알림 (Hook PostToolUse). 외부 API 0건, 데이터 외부 유출 0건. 이게 "AI Agent 인프라 모니터링 실시간 관제"의 한 사이클 minimum.
     </div>
 
     <div class="check-list">
       <h4>✓ 16차시 체크포인트</h4>
       <ul>
-        <li>QMD pos-manuals 컬렉션 인덱싱 + 검색 동작</li>
-        <li>AI 응답에 매뉴얼 §섹션 자동 인용</li>
+        <li>hooks.json 본인 MCP 설정 추가 + CLI 재시작</li>
+        <li>guard_ticket → 짧은 title block (exit 2)</li>
+        <li>on_anomaly → 임계 초과 시 알림 / 미만 시 silent</li>
+        <li>morning_brief → 어제 매장 Top 3 brief 출력</li>
+        <li>자연어 한 줄 → 5단계 자동 chain 동작</li>
         <li>HTML 대시보드 4 차트 + 티켓 표 렌더링</li>
       </ul>
     </div>
