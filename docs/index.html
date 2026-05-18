@@ -350,68 +350,35 @@
       <div class="goal-text">13차시에서 설치한 pos-ops MCP를 <strong>각자 운영 환경에 맞춰 직접 확장</strong>. tool · resource · prompt 3 슬롯 중 1개 이상 채우기 + 운영 한계 5가지 인지.</div>
     </div>
 
-    <h3><span class="step-num">1</span>강사 pos-ops MCP 3 tool 예시</h3>
-    <p>13차시에서 강사가 미리 만든 <code class="inline">pos-ops-mcp/mcp_server/server.py</code>에 들어있는 3 tool. 학습자가 본인 업무에 맞춰 tool 1개 직접 추가할 때 참고:</p>
-    <pre>from mcp.server.fastmcp import FastMCP
-mcp = FastMCP("pos-ops")
-
-@mcp.tool()
-def get_logs(store: str = None, status: str = None, limit: int = 20) -> list:
-    """최근 POS 거래 로그 조회 (시간 역순)."""
-    return _run("get_logs.py", [...])
-
-@mcp.tool()
-def detect_anomaly(window_min: int = 60, store: str = None) -> dict:
-    """최근 N분 거래에서 이상 케이스 집계 + top issue."""
-    return _run("detect_anomaly.py", [...])
-
-@mcp.tool()
-def create_ticket(title: str, body: str, priority: str = "P3-Medium",
-                  store: str = None, category: str = None) -> dict:
-    """운영 티켓 생성."""
-    return _run("create_ticket.py", [...])
-
-if __name__ == "__main__":
-    mcp.run(transport="stdio")</pre>
-
-    <h3><span class="step-num">2</span>실습 ① | 각자 업무에 맞는 tool 1개 추가</h3>
-    <p>위 패턴 그대로, 본인 업무에서 자주 쓰는 작업 1개를 함수로:</p>
+    <h3><span class="step-num">1</span>실습 · 자연어 한 줄로 본인 tool 추가</h3>
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
-      <pre style="white-space: pre-wrap;">"내 pos-ops MCP에 [본인 업무 작업] tool 추가해줘. 함수명·인자·반환값은 적당히."</pre>
+      <pre style="white-space: pre-wrap;">"내 pos-ops MCP에 [본인 업무 작업] tool 추가해줘. 함수명·인자·반환값은 적당히. resource·prompt 슬롯도 필요하면 같이."</pre>
     </div>
-    <pre style="margin-top: 10px;"># 예시 (Jira 티켓 분류)
-@mcp.tool()
-def classify_ticket(jira_id: str) -> dict:
-    """Jira 티켓을 카테고리로 분류."""
-    return {"jira_id": jira_id, "category": "payment"}</pre>
+    <p style="font-size: 14px; color: var(--muted);">CLI가 13차시 강사 코드 패턴 그대로 따라 함수 작성·등록·검증까지. 학습자는 본인 업무에 가까운 작업 1가지만 골라서 던지면 됩니다.</p>
 
-    <h3><span class="step-num">3</span>실습 ② | resource 슬롯 채우기</h3>
-    <p>현재 비워둔 resource 슬롯에 <strong>회사 운영 매뉴얼·임계값·스키마</strong>를 노출. AI가 자동으로 컨텍스트로 가져감.</p>
-    <pre>@mcp.resource("file:///path/to/manual.md")
-def runbook() -> str:
-    """POS 운영 매뉴얼 (Confluence export 또는 사내 .md)."""
-    return open("manual.md").read()</pre>
-    <p style="font-size: 13px; color: var(--muted);">→ rag-day3 QMD와 차이: QMD는 로컬 노트 검색용, MCP resource는 AI가 tool 호출 시 자동 참조하는 컨텍스트.</p>
-
-    <h3><span class="step-num">4</span>실습 ③ | prompt 슬롯 안내 추가</h3>
-    <p>Claude Code 스킬과 동일 역할 | AI에게 "이렇게 행동해라" 안내 템플릿. MCP 1 패키지 안에 통합 배포:</p>
-    <pre>@mcp.prompt()
-def anomaly_triage() -> str:
-    """이상 탐지 → 진단 → 티켓 5단계 흐름."""
-    return """
-    1. detect_anomaly(window_min=60)
-    2. 임계 초과 시 매뉴얼 §섹션 검색
-    3. 유사 과거 티켓 3건 조회
-    4. create_ticket(P1~P3, body=매뉴얼 인용 + 사례)
-    5. 알림 채널 전송
-    """</pre>
+    <h3><span class="step-num">2</span>보강 스킬 · 머리 정리 + 반복 개선</h3>
+    <table>
+      <thead><tr><th>스킬</th><th>역할</th><th>설치 / 호출</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>brainstorming</strong></td>
+          <td>"어떤 tool부터 만들지" 결정 전 아이디어 발산</td>
+          <td>1일차 설치한 <code class="inline">superpowers</code> 안에 이미 포함 · 자연어로 "brainstorming 스킬로 시작" 또는 <code class="inline">/brainstorming</code></td>
+        </tr>
+        <tr>
+          <td><strong>autoresearch</strong></td>
+          <td>"tool 만들기 → 동작 검증 → 만족 못하면 다시" 반복 루프</td>
+          <td>강사 공개 repo: <a href="https://github.com/daniel8824-del/autoresearch-skill" target="_blank"><code class="inline">github.com/daniel8824-del/autoresearch-skill</code></a> · 자연어로 "이 repo autoresearch 스킬 설치해줘"</td>
+        </tr>
+      </tbody>
+    </table>
 
     <div class="check-list">
       <h4>✓ 14차시 체크포인트</h4>
       <ul>
-        <li>각자 업무에 맞는 tool 1개 추가 + 동작 확인</li>
-        <li>resource / prompt 슬롯도 시간 되면 1개 추가</li>
+        <li>자연어 한 줄로 본인 tool 1개 추가 + 동작 확인</li>
+        <li>brainstorming · autoresearch 스킬 1회 시연</li>
       </ul>
     </div>
   </div>
