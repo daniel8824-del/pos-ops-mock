@@ -371,6 +371,11 @@
           <td>Modify → Verify → Keep/Discard → Repeat 자율 반복 루프 (Karpathy 원본 패턴)</td>
           <td><a href="https://github.com/karpathy/autoresearch" target="_blank"><code class="inline">github.com/karpathy/autoresearch</code></a> · 자연어로 "Karpathy autoresearch repo 보고 내 CLI에 스킬로 설치해줘"</td>
         </tr>
+        <tr>
+          <td><strong>gstack</strong></td>
+          <td>47 스킬 모음 (Day 2 설치 · 자주 쓰는 작업이 이미 스킬로 묶여 있음)</td>
+          <td>자연어로 "gstack <code class="inline">qa</code> 스킬로 본 tool 테스트해줘" · "gstack <code class="inline">browse</code>로 결과 시각 확인"</td>
+        </tr>
       </tbody>
     </table>
 
@@ -477,8 +482,14 @@
           <td>Playwright E2E 자동 (PostToolUse)</td>
           <td>"git commit 직후 Playwright E2E 자동 실행 + 실패 시 Discord 알림 hook"</td>
         </tr>
+        <tr>
+          <td>7</td>
+          <td>gstack 스킬 자동 호출 (PostToolUse)</td>
+          <td>"tool 호출 후 gstack <code class="inline">qa</code> 또는 <code class="inline">browse</code> 스킬 자동 실행해서 결과 확인 hook"</td>
+        </tr>
       </tbody>
     </table>
+    <p style="font-size: 13px; color: var(--muted);">→ Day 2에서 설치한 <strong>gstack 47 스킬</strong>은 hook 안에서도 호출 가능 (자연어로 "gstack [스킬명]"). hook이 단순 알림 외에 후속 자동화로 확장.</p>
 
     <div class="field-case">
       hook은 Jira MCP · Confluence MCP · Playwright MCP에도 동일. <code class="inline">matcher: "mcp__jira__create_issue"</code> 같이 MCP tool 이름으로 매칭. 위 5 후보는 학습자 환경에서 자연어 한 줄로 즉시 생성·등록·동작 확인.
