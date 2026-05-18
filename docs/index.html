@@ -263,13 +263,38 @@
       </tbody>
     </table>
 
-    <h3><span class="step-num">3</span>실습 ① | 설치 + 등록 (자연어 한 줄)</h3>
+    <h3><span class="step-num">3</span>회사 환경에서 로컬 RAG vs MCP · 스킬은 어디?</h3>
+    <p>13차시 끝내고 14차시(MCP 고도화) 가기 전, 큰 그림 한 번 정리:</p>
+
+    <h4 style="margin-top: 16px; font-size: 15px;">3.1 로컬 RAG vs MCP · 어느 케이스에 어느 쪽?</h4>
+    <table>
+      <thead><tr><th>케이스</th><th>권장</th></tr></thead>
+      <tbody>
+        <tr><td>본인 노트 · 문서 검색 (보안 민감)</td><td>로컬 RAG (Day 3 QMD)</td></tr>
+        <tr><td>회사 도구 (JIRA · Confluence · DB) AI 연결</td><td><strong>MCP 우선</strong></td></tr>
+        <tr><td>둘 다 필요</td><td>MCP 메인 + RAG는 매뉴얼 · 과거 티켓 검색 보조</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size: 14px; color: var(--muted);">→ 도시바 · 아모레 환경은 이미 JIRA · Confluence · Gitlab · AWS · Oracle MCP 누적. <strong>MCP가 메인 채널</strong>. 로컬 RAG는 회사 매뉴얼 / 과거 티켓 / 사내 wiki 보조.</p>
+
+    <h4 style="margin-top: 16px; font-size: 15px;">3.2 스킬 vs MCP tool vs MCP prompt · 역할 분담</h4>
+    <table>
+      <thead><tr><th>구분</th><th>역할</th><th>실행 주체</th></tr></thead>
+      <tbody>
+        <tr><td>스킬 (.md)</td><td>"AI에게 어떻게 행동할지" 안내</td><td>AI 자체</td></tr>
+        <tr><td>MCP tool (함수)</td><td>"실제 외부 시스템 실행"</td><td>외부 프로세스 (Python · Node)</td></tr>
+        <tr><td>MCP prompt (안내)</td><td>"AI에게 안내" (= 스킬을 MCP 안에 박은 것)</td><td>AI 자체</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size: 14px;"><strong>가장 강력한 패턴</strong> · MCP server 1개에 tool (실행) + resource (데이터) + prompt (안내) 3 슬롯 모두 활용 → 스킬을 MCP prompt 슬롯에 박아서 본인 회사 도구 · 매뉴얼 · 운영 흐름 한 패키지로 배포. 학습자 본인 CLI에 1줄 등록하면 자동 chain. 14차시에서 직접 해봅니다.</p>
+
+    <h3><span class="step-num">4</span>실습 ① | 설치 + 등록 (자연어 한 줄)</h3>
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
       <pre style="white-space: pre-wrap;">"github.com/daniel8824-del/pos-ops-mcp 이거 clone 후 venv 만들고 mcp 패키지 설치한 다음, 내 MCP 설정 파일의 mcpServers 에 pos-ops 서버 추가해줘. 기존 서버는 보존하고, 끝나면 syntax 검증해줘."</pre>
     </div>
 
-    <h3><span class="step-num">4</span>실습 ② | smoke 4종 통과 확인</h3>
+    <h3><span class="step-num">5</span>실습 ② | smoke 4종 통과 확인</h3>
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
       <pre style="white-space: pre-wrap;">"방금 설치한 pos-ops MCP smoke 테스트 돌려서 4개 다 통과하는지 알려줘"</pre>
@@ -282,7 +307,7 @@
 # OK  mcp_server      (3 tools)
 # ✓ all 4 tests passed</pre>
 
-    <h3><span class="step-num">5</span>실습 ③ | 자연어 한 줄로 운영 사이클 시연</h3>
+    <h3><span class="step-num">6</span>실습 ③ | 자연어 한 줄로 운영 사이클 시연</h3>
     <p>등록 + smoke 통과 후 본인 CLI에서 자연어 한 줄:</p>
     <pre>"최근 1시간 이상 거래 있어? 1순위 이슈만 P2로 티켓 만들어줘"
 
