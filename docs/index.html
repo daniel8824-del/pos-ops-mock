@@ -526,14 +526,22 @@
     </div>
     <p style="font-size: 13px; color: var(--muted);">Python 3.10+ · Windows native는 chromadb 빌드 이슈 가능 → WSL 권장 · 데이터는 <code class="inline">./opencrab_data/</code> 로컬 보관.</p>
 
-    <h3><span class="step-num">2</span>사내 문서 ingest + 검색</h3>
+    <h3><span class="step-num">2</span>샘플 팩으로 ontology 그래프 빠르게 보기</h3>
+    <p>OpenCrab에 미리 들어 있는 도메인 팩 3개 (<code class="inline">saas</code> · <code class="inline">biomedical</code> · <code class="inline">legal</code>) 중 1개를 install해서 본인 도메인 만들기 전에 그래프 동작 한 번 체감:</p>
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre style="white-space: pre-wrap;">"OpenCrab에 saas 팩 install하고 'customer churn' 같은 query로 ontology 그래프 한 번 보여줘"</pre>
+    </div>
+    <p style="font-size: 13px; color: var(--muted);">→ entity·관계·query 결과가 어떤 형태로 나오는지 5분 안에 체감 → 본인 도메인 9 step 모델링이 훨씬 쉬워짐.</p>
+
+    <h3><span class="step-num">3</span>사내 문서 ingest + 검색</h3>
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
       <pre style="white-space: pre-wrap;">"내 사내 문서 폴더 [경로]를 OpenCrab에 ingest하고 '환불 처리' 검색해서 매칭 문서 알려줘"</pre>
     </div>
     <p style="font-size: 13px; color: var(--muted);">AI가 <code class="inline">ontology_ingest</code> · <code class="inline">ontology_extract</code> · <code class="inline">ontology_query</code> 자동 chain.</p>
 
-    <h3><span class="step-num">3</span>9단계 본인 도메인 ontology 모델링</h3>
+    <h3><span class="step-num">4</span>9단계 본인 도메인 ontology 모델링</h3>
     <p>본인 업무 도메인 1개 선택 (POS 운영 / Jira 티켓 / Confluence 매뉴얼 / 이메일 / 일정 등 무엇이든). 9 step:</p>
     <table>
       <thead><tr><th>step</th><th>작업</th><th>예시 (Jira 티켓 도메인)</th></tr></thead>
@@ -550,7 +558,7 @@
       </tbody>
     </table>
 
-    <h3><span class="step-num">4</span>온톨로지 산출물 예시 (다양한 도메인)</h3>
+    <h3><span class="step-num">5</span>온톨로지 산출물 예시 (다양한 도메인)</h3>
     <p>ontology 그래프 layer를 얹으면 단순 검색 이상의 산출 가능. 4 도메인 예시:</p>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0;">
       <figure style="margin: 0;">
@@ -584,7 +592,7 @@
     </div>
     <p style="font-size: 13px; color: var(--muted);">→ 도시바·아모레 ITO 환경에서 위 패턴을 본인 도메인 (POS 운영 · Jira 티켓 · Confluence 매뉴얼)으로 1:1 port.</p>
 
-    <h3><span class="step-num">5</span>HTML 대시보드 + 자연어 한 줄 chain</h3>
+    <h3><span class="step-num">6</span>HTML 대시보드 + 자연어 한 줄 chain</h3>
     <p>매장별 KPI · 시간대별 거래 · 이상 유형 분포 · 미해결 티켓 한눈에. <a href="dashboard.html">→ 대시보드 보기</a></p>
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
