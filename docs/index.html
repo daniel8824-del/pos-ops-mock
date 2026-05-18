@@ -444,37 +444,36 @@
     <p style="font-size: 13px; color: var(--muted);">Copilot CLI도 PreToolUse · PostToolUse · SessionStart 표준 hook 지원 (2026-02 GA). Claude Code와 동일 패턴.</p>
 
     <h3><span class="step-num">4</span>실습 · 본인 업무 맞춤 hook 1개 추가</h3>
-    <p><strong>가장 먼저 권장</strong>: 본인 pos-ops MCP <code class="inline">create_ticket</code> 호출 후 Discord/Slack에 자동 알림 hook (MCP 실습과 직접 연계). 익숙해지면 아래 후보로 확장:</p>
     <table>
       <thead><tr><th>#</th><th>훅 후보</th><th>자연어 한 줄</th></tr></thead>
       <tbody>
         <tr>
-          <td>0</td>
-          <td><strong>티켓 생성 알림 (PostToolUse) · 추천 시작</strong></td>
+          <td>1</td>
+          <td>티켓 생성 알림 (PostToolUse)</td>
           <td>"pos-ops create_ticket 호출 직후 Discord webhook 으로 자동 알림 보내는 hook 추가해줘"</td>
         </tr>
         <tr>
-          <td>1</td>
+          <td>2</td>
           <td>DB 위험 명령 가드 (PreToolUse)</td>
           <td>"POS DB tool 호출 시 WHERE 없는 UPDATE/DELETE 자동 차단 hook"</td>
         </tr>
         <tr>
-          <td>2</td>
+          <td>3</td>
           <td>Jira 티켓 자동 코멘트 (PostToolUse)</td>
           <td>"tool 호출 결과 현재 처리 중인 Jira 티켓에 자동 코멘트 hook"</td>
         </tr>
         <tr>
-          <td>3</td>
+          <td>4</td>
           <td>Confluence 매뉴얼 자동 첨부 (UserPromptSubmit)</td>
           <td>"'환불 처리' · '단말 다운' 키워드 감지 시 Confluence 해당 페이지 자동 컨텍스트 첨부 hook"</td>
         </tr>
         <tr>
-          <td>4</td>
+          <td>5</td>
           <td>출근 brief (SessionStart)</td>
           <td>"세션 시작할 때마다 내 담당 Jira 미해결 티켓 + 어제 처리 요약 자동 brief hook"</td>
         </tr>
         <tr>
-          <td>5</td>
+          <td>6</td>
           <td>Playwright E2E 자동 (PostToolUse)</td>
           <td>"git commit 직후 Playwright E2E 자동 실행 + 실패 시 Discord 알림 hook"</td>
         </tr>
