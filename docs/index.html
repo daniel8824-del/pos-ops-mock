@@ -276,14 +276,14 @@
     </table>
     <h4 style="margin-top: 16px; font-size: 15px;">3.2 스킬 vs MCP tool vs MCP prompt · 역할 분담</h4>
     <table>
-      <thead><tr><th>구분</th><th>역할</th><th>실행 주체</th></tr></thead>
+      <thead><tr><th>구분</th><th>역할</th><th>위치</th><th>실행 주체</th></tr></thead>
       <tbody>
-        <tr><td>스킬 (.md)</td><td>"AI에게 어떻게 행동할지" 안내</td><td>AI 자체</td></tr>
-        <tr><td>MCP tool (함수)</td><td>"실제 외부 시스템 실행"</td><td>외부 프로세스 (Python · Node)</td></tr>
-        <tr><td>MCP prompt (안내)</td><td>"AI에게 안내" (= 스킬을 MCP 안에 박은 것)</td><td>AI 자체</td></tr>
+        <tr><td>스킬 (.md)</td><td>AI에게 "어느 tool 어떻게 chain"할지 안내</td><td>별도 파일 (스킬 폴더)</td><td>AI 자체</td></tr>
+        <tr><td>MCP tool (함수)</td><td>실제 외부 시스템 실행</td><td>MCP server 코드</td><td>외부 프로세스 (Python · Node)</td></tr>
+        <tr><td>MCP prompt</td><td>스킬과 동일 안내</td><td>MCP server 내장</td><td>AI 자체</td></tr>
       </tbody>
     </table>
-    <p style="font-size: 14px;"><strong>가장 강력한 패턴</strong> · MCP server 1개에 tool (실행) + resource (데이터) + prompt (안내) 3 슬롯 모두 활용 → 스킬을 MCP prompt 슬롯에 박아서 본인 회사 도구 · 매뉴얼 · 운영 흐름 한 패키지로 배포. 학습자 본인 CLI에 1줄 등록하면 자동 chain. 14차시에서 직접 해봅니다.</p>
+    <p style="font-size: 14px;"><strong>스킬 = MCP prompt와 같은 역할</strong> · 어디 두는가만 다름. 스킬은 .md 별도 파일, MCP prompt는 server 1 패키지로 통합 배포. 가장 강력한 패턴은 MCP server 1개에 tool · resource · prompt 3 슬롯 모두 채워서 본인 CLI에 1줄 등록 (14차시 실습).</p>
 
     <h3><span class="step-num">4</span>실습 ① | 설치 + 등록 (자연어 한 줄)</h3>
     <div class="track instr">
