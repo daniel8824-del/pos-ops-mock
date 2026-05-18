@@ -233,7 +233,13 @@
     </figure>
 
     <h3><span class="step-num">1</span>MCP 3 슬롯</h3>
-    <p>MCP 서버는 host·client·server 3-tier. 서버가 노출하는 건 <strong>3 슬롯</strong>:</p>
+    <p>MCP는 <strong>Host(AI 앱) · Client(연결 담당) · Server(도구 제공자)</strong> 3 역할 구조. 위 만화 식당 비유로 보면 손님(Host) · 종업원(Client) · 주방(Server). <strong>우리가 13차시에 만드는 건 Server.</strong></p>
+    <ul style="font-size: 14px; color: var(--muted);">
+      <li><strong>Host</strong> | Claude Code · Copilot · Cursor 같은 AI 앱</li>
+      <li><strong>Client</strong> | Host 안에서 server 한 곳에 1:1 연결</li>
+      <li><strong>Server</strong> | 도구 · 데이터 · 안내문 노출 (우리가 만드는 것)</li>
+    </ul>
+    <p>Server가 노출하는 건 <strong>3 슬롯</strong>:</p>
     <table>
       <thead><tr><th>슬롯</th><th>역할</th><th>예시</th></tr></thead>
       <tbody>
@@ -246,9 +252,7 @@
     <h3><span class="step-num">2</span>실습 ① | repo clone + venv</h3>
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
-      <pre>"github.com/daniel8824-del/pos-ops-mcp
-이거 clone 후 venv 만들고
-mcp 패키지 설치해줘"</pre>
+      <pre style="white-space: pre-wrap;">"github.com/daniel8824-del/pos-ops-mcp 이거 clone 후 venv 만들고 mcp 패키지 설치해줘"</pre>
     </div>
 
     <h3><span class="step-num">3</span>실습 ② | 3 tool smoke 검증</h3>
