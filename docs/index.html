@@ -455,7 +455,7 @@
         <tr>
           <td>1</td>
           <td>티켓 생성 알림 (PostToolUse)</td>
-          <td>"pos-ops create_ticket 호출 직후 Discord webhook 으로 자동 알림 보내는 hook 추가해줘"</td>
+          <td>"pos-ops create_ticket 호출 직후 내 알림 채널로 자동 알림 보내는 hook 추가해줘"</td>
         </tr>
         <tr>
           <td>2</td>
@@ -480,7 +480,7 @@
         <tr>
           <td>6</td>
           <td>Playwright E2E 자동 (PostToolUse)</td>
-          <td>"git commit 직후 Playwright E2E 자동 실행 + 실패 시 Discord 알림 hook"</td>
+          <td>"git commit 직후 Playwright E2E 자동 실행 + 실패 시 알림 hook"</td>
         </tr>
         <tr>
           <td>7</td>
@@ -490,10 +490,6 @@
       </tbody>
     </table>
     <p style="font-size: 13px; color: var(--muted);">→ Day 2에서 설치한 <strong>gstack 47 스킬</strong>은 hook 안에서도 호출 가능 (자연어로 "gstack [스킬명]"). hook이 단순 알림 외에 후속 자동화로 확장.</p>
-
-    <div class="field-case">
-      hook은 Jira MCP · Confluence MCP · Playwright MCP에도 동일. <code class="inline">matcher: "mcp__jira__create_issue"</code> 같이 MCP tool 이름으로 매칭. 위 5 후보는 학습자 환경에서 자연어 한 줄로 즉시 생성·등록·동작 확인.
-    </div>
 
     <div class="check-list">
       <h4>✓ 15차시 체크포인트</h4>
