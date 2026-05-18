@@ -298,16 +298,6 @@
 #   1. detect_anomaly(window_min=60) → top_issue + count + 영향 매장
 #   2. create_ticket(title, body, priority=P2-High, store, category) → OPS-XXXX</pre>
 
-    <div class="reference">
-      <p><strong>참고 | 자연어 거치지 않고 직접 편집할 경우</strong> | 설정 파일에 다음 객체를 <code class="inline">mcpServers</code> 안에 추가 (기존 서버 보존). 경로는 본인 환경에 맞게 교체:</p>
-      <pre style="margin-top: 8px;">{
-  "pos-ops": {
-    "command": "/home/daniel/pos-ops-mcp/.venv/bin/python3",
-    "args": ["/home/daniel/pos-ops-mcp/mcp_server/server.py"]
-  }
-}</pre>
-    </div>
-
     <div class="check-list">
       <h4>✓ 13차시 체크포인트</h4>
       <ul>
