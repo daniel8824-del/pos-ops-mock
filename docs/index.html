@@ -234,12 +234,6 @@
 
     <h3><span class="step-num">1</span>MCP 3 역할 구조</h3>
     <p>MCP는 <strong>Host(AI 앱) · Client(연결 담당) · Server(도구 제공자)</strong> 3 역할 구조. <strong>우리가 만드는 건 Server.</strong></p>
-    <ul style="font-size: 14px; color: var(--muted);">
-      <li><strong>Host</strong> | Claude Code · Copilot · Cursor 같은 AI 앱</li>
-      <li><strong>Client</strong> | Host 안에서 server 한 곳에 1:1 연결</li>
-      <li><strong>Server</strong> | 도구 · 데이터 · 안내문 노출 (우리가 만드는 것)</li>
-    </ul>
-    <p>Server가 노출하는 건 <strong>3 슬롯</strong>:</p>
     <table>
       <thead><tr><th>슬롯</th><th>역할</th><th>예시</th></tr></thead>
       <tbody>
@@ -250,7 +244,7 @@
     </table>
 
     <h3><span class="step-num">2</span>pos-ops MCP 서버가 실제로 하는 일</h3>
-    <p>본 강의용 pos-ops MCP server는 <strong>tool 슬롯에 3개 함수만</strong> 노출 (resource · prompt 슬롯은 비워둠). POS 운영팀 핵심 일 3가지를 AI에 연결.</p>
+    <p>본 강의용 pos-ops MCP server는 <strong>tool 슬롯에 3개 함수만</strong> 노출 (resource · prompt 슬롯은 비워둠).</p>
     <table>
       <thead><tr><th>tool</th><th>이 함수가 하는 일</th></tr></thead>
       <tbody>
@@ -268,14 +262,12 @@
         </tr>
       </tbody>
     </table>
-    <p style="font-size: 14px;">→ AI가 자연어 한 줄 받으면 위 3 tool을 chain 호출 (탐지 → 진단 → 티켓). 본 mock은 시뮬레이션 데이터로 동작하며, 학습자가 본인 회사 도구로 교체하면 그대로 운영 시스템이 됩니다.</p>
 
     <h3><span class="step-num">3</span>실습 ① | 설치 + 등록 (자연어 한 줄)</h3>
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
       <pre style="white-space: pre-wrap;">"github.com/daniel8824-del/pos-ops-mcp 이거 clone 후 venv 만들고 mcp 패키지 설치한 다음, 내 MCP 설정 파일의 mcpServers 에 pos-ops 서버 추가해줘. 기존 서버는 보존하고, 끝나면 syntax 검증해줘."</pre>
     </div>
-    <p style="font-size: 13px; color: var(--muted);">AI가 자기 환경 CLI의 설정 위치를 알아서 찾음 (Claude Code = <code class="inline">~/.claude/settings.json</code> · Copilot CLI = <code class="inline">~/.copilot/mcp-config.json</code> · Cursor = <code class="inline">~/.cursor/mcp.json</code>). 등록 후 CLI 재시작.</p>
 
     <h3><span class="step-num">4</span>실습 ② | smoke 4종 통과 확인</h3>
     <div class="track instr">
