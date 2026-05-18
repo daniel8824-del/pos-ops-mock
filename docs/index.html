@@ -223,6 +223,15 @@
       <div class="goal-text">MCP 서버를 <strong>직접 한 파일로</strong> 만들고, 학습자 본인 Copilot/Claude Code에 <strong>mcp.json 1줄</strong>로 연결. 3 tool (<code class="inline">get_logs</code> · <code class="inline">detect_anomaly</code> · <code class="inline">create_ticket</code>)이 자연어 한 줄로 자동 호출되는지 확인.</div>
     </div>
 
+    <figure style="margin: 24px 0; text-align: center;">
+      <img src="images/comics/03-mcp.png" alt="MCP 식당 메타포 — Day 2 리마인드"
+           style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+      <figcaption style="font-size: 13px; color: var(--muted); margin-top: 10px; font-style: italic;">
+        Day 2 리마인드 | <strong>MCP = 식당 주방의 표준 인터페이스</strong> — 어느 도구(POS · DB · 알림)든 같은 프로토콜로 연결.
+        (<a href="https://daniel8824-del.github.io/pos-day2/" target="_blank">Day 2 사이트</a> 만화 ③)
+      </figcaption>
+    </figure>
+
     <h3><span class="step-num">1</span>MCP 3 슬롯</h3>
     <p>MCP 서버는 host·client·server 3-tier. 서버가 노출하는 건 <strong>3 슬롯</strong>:</p>
     <table>
@@ -235,21 +244,11 @@
     </table>
 
     <h3><span class="step-num">2</span>실습 ① | repo clone + venv</h3>
-    <div class="dual-track">
-      <div class="track instr">
-        <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
-        <pre>"github.com/daniel8824-del/pos-ops-mcp
+    <div class="track instr" style="max-width: 600px;">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre>"github.com/daniel8824-del/pos-ops-mcp
 이거 clone 후 venv 만들고
 mcp 패키지 설치해줘"</pre>
-      </div>
-      <div class="track stu">
-        <div class="track-h">터미널 직접 (PowerShell · bash)</div>
-        <pre>git clone https://github.com/daniel8824-del/pos-ops-mcp `
-  ~/pos-ops-mcp
-cd ~/pos-ops-mcp
-python3 -m venv .venv
-.venv/bin/pip install mcp</pre>
-      </div>
     </div>
 
     <h3><span class="step-num">3</span>실습 ② | 3 tool smoke 검증</h3>
