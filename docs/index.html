@@ -195,13 +195,13 @@
       </div>
       <div class="day-cell">
         <span class="day-time">11:00 – 12:00 (60분)</span>
-        <div class="ttl">15차시 | 멀티 언급 + 로컬 RAG · 온톨로지</div>
-        <div class="desc">멀티에이전트 4 패턴 짧게. 사내 문서 QMD 인덱싱 + yucrates MCP 9단계 개인 온톨로지 (본인 도메인).</div>
+        <div class="ttl">15차시 | 멀티 언급 + 훅 실습</div>
+        <div class="desc">멀티에이전트 4 패턴 짧게. 훅 3종 동작 확인 + 본인 업무 맞춤 hook 1개 추가 (Day 2 만화 리마인드).</div>
       </div>
       <div class="day-cell">
         <span class="day-time">12:00 – 13:00 (60분)</span>
-        <div class="ttl">16차시 | 인프라 모니터링 + 훅</div>
-        <div class="desc">AI Agent 연동 실시간 관제 사례. PreToolUse · PostToolUse · SessionStart 훅 실습 + HTML 대시보드.</div>
+        <div class="ttl">16차시 | OpenCrab + 9단계 온톨로지</div>
+        <div class="desc">OpenCrab MCP 설치 + 사내 문서 ingest + 본인 도메인 9단계 ontology + HTML 대시보드.</div>
       </div>
     </div>
 
@@ -385,15 +385,15 @@
 </section>
 
 
-<!-- ============ 15차시 멀티 언급 + 로컬 RAG + 온톨로지 ============ -->
+<!-- ============ 15차시 멀티 짧게 + 훅 실습 ============ -->
 <section id="ch15">
   <div class="container">
     <span class="section-tag">§ 15차시 · 11:00 ~ 12:00 (60분)</span>
-    <h2><span class="accent">멀티 언급 + 로컬 RAG · 9단계 개인 온톨로지</span></h2>
+    <h2><span class="accent">멀티 언급 + 훅 실습</span></h2>
 
     <div class="goal">
       <div class="goal-label">학습 목표</div>
-      <div class="goal-text">멀티에이전트 4 패턴 <strong>언급만</strong> (하네스 + MCP 잘 만들면 자연 해결). 그 시간 위에 <strong>사내 문서 → QMD 인덱싱</strong> (Day 3 재방문) + <strong>yucrates(OpenCrab) MCP 복제 후 본인 업무 도메인 9단계 개인 온톨로지</strong> 직접 모델링.</div>
+      <div class="goal-text">멀티에이전트 4 패턴 <strong>언급만</strong>. 훅 3종 동작 확인 + <strong>본인 업무 맞춤 hook 1개 추가</strong> (자연어 한 줄).</div>
     </div>
 
     <h3><span class="step-num">1</span>멀티에이전트 4 패턴 | 언급만</h3>
@@ -410,133 +410,162 @@
       <p>본 강의에서 <strong>서브에이전트 · 팀 체제는 깊이 다루지 않음</strong>. 하네스(13·14차시 MCP) + 명확한 도구 정의가 우선 | 그 위에 멀티 패턴은 자연 합류. 깊이 들어가는 건 별도 워크숍 권장.</p>
     </div>
 
-    <h3><span class="step-num">2</span>로컬 RAG 재방문 | 사내 문서 QMD 인덱싱</h3>
-    <p>Day 3 9차시에서 설치한 QMD를 사내 문서로 다시. Confluence export · 운영 매뉴얼 PDF · 과거 티켓 archive 등 어떤 형태든 마크다운으로 변환 후 인덱싱:</p>
-    <div class="track instr">
-      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
-      <pre style="white-space: pre-wrap;">"내 사내 문서 폴더 [경로]를 [컬렉션이름] 컬렉션으로 QMD에 등록하고 인덱싱한 다음, 'POS 단말 다운 해결' 검색해서 어떤 문서가 매칭되는지 알려줘"</pre>
+    <h3><span class="step-num">2</span>훅 + 스킬 개념 리마인드 (Day 2)</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;">
+      <figure style="margin: 0;">
+        <img src="images/comics/01-prompt-project-skill.png" alt="스킬 만화"
+             style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border); display: block;">
+        <figcaption style="font-size: 12px; color: var(--muted); margin-top: 6px; font-style: italic; text-align: left;">
+          Day 2 리마인드 · <strong>스킬</strong> (PROMPT · PROJECT · SKILL)
+        </figcaption>
+      </figure>
+      <figure style="margin: 0;">
+        <img src="images/comics/02-hook.png" alt="훅 만화"
+             style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border); display: block;">
+        <figcaption style="font-size: 12px; color: var(--muted); margin-top: 6px; font-style: italic; text-align: left;">
+          Day 2 리마인드 · <strong>훅</strong> (도구 호출 전·후·시작 자동 발동)
+        </figcaption>
+      </figure>
     </div>
-    <p style="font-size: 13px; color: var(--muted);">→ 인덱싱이 끝나면 MCP의 resource 슬롯(14차시 §3)에 동일 폴더를 노출 → AI가 tool 호출 시 자동 컨텍스트 가져감. 두 layer가 합쳐짐.</p>
 
-    <h3><span class="step-num">3</span>yucrates(OpenCrab) MCP 복제</h3>
-    <p>강사 본인 yucrates 원본을 복제해서 학습자 환경 또는 사내용으로 변형. 학술적 메타-온톨로지 (canonicalize · promotion · schema_pack · identity) 노출 X | <strong>9단계 개인 모델링만 사용</strong>:</p>
-    <div class="track instr">
-      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
-      <pre style="white-space: pre-wrap;">"github 의 OpenCrab MCP repo clone 한 다음, 내 환경용으로 단순화(canonicalize·promotion·schema_pack·identity 비활성)해서 ontology_query / ontology_impact / add_node / add_edge 4 tool만 노출하게 wrapper 만들어줘. 내 MCP 설정 파일에 등록까지."</pre>
-    </div>
-
-    <h3><span class="step-num">4</span>9단계 개인 온톨로지 | 본인 도메인</h3>
-    <p>학습자가 <strong>본인 업무 도메인을 직접 선택</strong>. POS 운영, Jira 티켓, Confluence 매뉴얼, 사내 프로젝트 관리, 일정·이메일 | 어느 영역이든 가능. 9 step 진행:</p>
+    <h3><span class="step-num">3</span>훅 3종 동작 확인 (강사 pos-ops 예시)</h3>
     <table>
-      <thead><tr><th>step</th><th>작업</th><th>예시 (학습자 도메인 1)</th></tr></thead>
+      <thead><tr><th>종류</th><th>시점</th><th>역할</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td>도메인 결정</td><td>"운영 티켓 자동 분류"</td></tr>
-        <tr><td>2</td><td>entity 후보 5~9개 추출</td><td>Ticket · Reporter · Assignee · Category · Status · Priority</td></tr>
-        <tr><td>3</td><td>관계 후보 3~7개</td><td>Reporter|creates→Ticket · Assignee|handles→Ticket · Ticket|has→Category</td></tr>
-        <tr><td>4</td><td>한 줄 명세</td><td>각 node/edge "이건 무엇" 한 줄 설명</td></tr>
-        <tr><td>5</td><td>YAML 작성</td><td>yucrates ingest 형식</td></tr>
-        <tr><td>6</td><td><code class="inline">ontology_ingest(yaml)</code></td><td>강사 instance 또는 본인 인스턴스</td></tr>
-        <tr><td>7</td><td><code class="inline">ontology_query("...")</code></td><td>자연어 → 그래프 traversal</td></tr>
-        <tr><td>8</td><td>회사 도구 연동</td><td>Jira ticket ID · Confluence page ID를 node 속성으로 연결</td></tr>
-        <tr><td>9</td><td>MCP 통합</td><td>이 ontology를 14차시 MCP resource 슬롯에 노출 → AI 자동 참조</td></tr>
+        <tr><td><strong>PreToolUse</strong></td><td>tool 호출 <em>직전</em></td><td>가드레일 · 위험 인자 · 중복 차단</td></tr>
+        <tr><td><strong>PostToolUse</strong></td><td>tool 호출 <em>직후</em></td><td>알림 · 후속 작업</td></tr>
+        <tr><td><strong>SessionStart</strong></td><td>세션 시작 시점</td><td>brief · 어제 운영 요약</td></tr>
+      </tbody>
+    </table>
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre style="white-space: pre-wrap;">"pos-ops-mcp/hooks/hooks.json 내 MCP 설정에 추가하고 3 hook 한 번씩 동작 확인해줘"</pre>
+    </div>
+    <p style="font-size: 13px; color: var(--muted);">Copilot CLI도 PreToolUse · PostToolUse · SessionStart 표준 hook 지원 (2026-02 GA). Claude Code와 동일 패턴.</p>
+
+    <h3><span class="step-num">4</span>실습 · 본인 업무 맞춤 hook 1개 추가</h3>
+    <p><strong>가장 먼저 권장</strong>: 본인 pos-ops MCP <code class="inline">create_ticket</code> 호출 후 Discord/Slack에 자동 알림 hook (MCP 실습과 직접 연계). 익숙해지면 아래 후보로 확장:</p>
+    <table>
+      <thead><tr><th>#</th><th>훅 후보</th><th>자연어 한 줄</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>0</td>
+          <td><strong>티켓 생성 알림 (PostToolUse) · 추천 시작</strong></td>
+          <td>"pos-ops create_ticket 호출 직후 Discord webhook 으로 자동 알림 보내는 hook 추가해줘"</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>DB 위험 명령 가드 (PreToolUse)</td>
+          <td>"POS DB tool 호출 시 WHERE 없는 UPDATE/DELETE 자동 차단 hook"</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Jira 티켓 자동 코멘트 (PostToolUse)</td>
+          <td>"tool 호출 결과 현재 처리 중인 Jira 티켓에 자동 코멘트 hook"</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Confluence 매뉴얼 자동 첨부 (UserPromptSubmit)</td>
+          <td>"'환불 처리' · '단말 다운' 키워드 감지 시 Confluence 해당 페이지 자동 컨텍스트 첨부 hook"</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>출근 brief (SessionStart)</td>
+          <td>"세션 시작할 때마다 내 담당 Jira 미해결 티켓 + 어제 처리 요약 자동 brief hook"</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Playwright E2E 자동 (PostToolUse)</td>
+          <td>"git commit 직후 Playwright E2E 자동 실행 + 실패 시 Discord 알림 hook"</td>
+        </tr>
       </tbody>
     </table>
 
-    <p style="font-size: 14px; color: var(--muted);"><strong>도메인 다양화 안내</strong> | POS만의 예시 X. 학습자 본인 일상 업무 영역 | 일정 관리 / 이메일 분류 / 코드 리뷰 / 사내 위키 / 고객 문의 / 프로젝트 일정 | 무엇이든 9 step 동일.</p>
-
     <div class="field-case">
-      이 9단계는 <strong>학술 온톨로지가 아닌 운영 모델링</strong>. 회사 도메인을 AI가 이해할 수 있게 노드·관계로 정리하면, MCP tool 호출 시 의미 layer가 자동 합류 | "강남역 매장 결제 실패" 한 줄에서 영향 받는 entity·티켓·매뉴얼·담당자가 한 번에 traversal.
+      hook은 Jira MCP · Confluence MCP · Playwright MCP에도 동일. <code class="inline">matcher: "mcp__jira__create_issue"</code> 같이 MCP tool 이름으로 매칭. 위 5 후보는 학습자 환경에서 자연어 한 줄로 즉시 생성·등록·동작 확인.
     </div>
 
     <div class="check-list">
       <h4>✓ 15차시 체크포인트</h4>
       <ul>
-        <li>멀티에이전트 4 패턴 인지 (서브에이전트·팀 깊이 X)</li>
-        <li>사내 문서 QMD 컬렉션 1개 인덱싱 + 검색 동작</li>
-        <li>본인 업무 도메인 9단계 ontology YAML 1개 작성</li>
-        <li><code class="inline">ontology_query</code> 자연어 질문 1건 실행 성공</li>
+        <li>멀티에이전트 4 패턴 인지</li>
+        <li>훅 3종 (Pre · Post · SessionStart) 강사 예시 동작 확인</li>
+        <li>본인 업무 맞춤 hook 1개 추가 + 동작 검증</li>
       </ul>
     </div>
   </div>
 </section>
 
 
-<!-- ============ 16차시 인프라 모니터링 + 훅 ============ -->
+<!-- ============ 16차시 OpenCrab + 모니터링 + 대시보드 ============ -->
 <section id="ch16">
   <div class="container">
     <span class="section-tag">§ 16차시 · 12:00 ~ 13:00 (60분)</span>
-    <h2><span class="accent">인프라 모니터링</span> | AI Agent 실시간 관제 + 훅 자동화</h2>
+    <h2><span class="accent">OpenCrab</span> + 9단계 온톨로지 + 운영 모니터링</h2>
 
     <div class="goal">
       <div class="goal-label">학습 목표</div>
-      <div class="goal-text">원래 요구사항 ③ <strong>"인프라 모니터링을 AI 개발 Tool 또는 Agent와 연동하여 실시간 관제하여 활용한 사례"</strong>를 한 사이클로 시연. <strong>훅 3종</strong> (PreToolUse · PostToolUse · SessionStart) + HTML 대시보드 + 매뉴얼 자동 인용.</div>
+      <div class="goal-text"><strong>OpenCrab MCP 원본</strong> 설치 + 사내 문서 ingest → <strong>본인 업무 9단계 ontology</strong> 모델링 + <strong>HTML 대시보드</strong>로 운영 모니터링 한 사이클.</div>
     </div>
 
-    <h3><span class="step-num">1</span>훅 3 종류 + 발동 시점</h3>
+    <h3><span class="step-num">1</span>OpenCrab MCP 설치</h3>
+    <p>원본 repo (학술 layer 없는 깨끗한 베이스 · 로컬 SQLite + Chroma · 외부 DB 불필요): <a href="https://github.com/AlexAI-MCP/OpenCrab" target="_blank"><code class="inline">github.com/AlexAI-MCP/OpenCrab</code></a></p>
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre style="white-space: pre-wrap;">"github.com/AlexAI-MCP/OpenCrab clone 후 pip install -e .[dev] 한 다음, opencrab serve로 실행하고 내 MCP 설정에 등록해줘"</pre>
+    </div>
+    <p style="font-size: 13px; color: var(--muted);">Python 3.10+ · Windows native는 chromadb 빌드 이슈 가능 → WSL 권장 · 데이터는 <code class="inline">./opencrab_data/</code> 로컬 보관.</p>
+
+    <h3><span class="step-num">2</span>사내 문서 ingest + 검색</h3>
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre style="white-space: pre-wrap;">"내 사내 문서 폴더 [경로]를 OpenCrab에 ingest하고 '환불 처리' 검색해서 매칭 문서 알려줘"</pre>
+    </div>
+    <p style="font-size: 13px; color: var(--muted);">AI가 <code class="inline">ontology_ingest</code> · <code class="inline">ontology_extract</code> · <code class="inline">ontology_query</code> 자동 chain.</p>
+
+    <h3><span class="step-num">3</span>9단계 본인 도메인 ontology 모델링</h3>
+    <p>본인 업무 도메인 1개 선택 (POS 운영 / Jira 티켓 / Confluence 매뉴얼 / 이메일 / 일정 등 무엇이든). 9 step:</p>
     <table>
-      <thead><tr><th>종류</th><th>시점</th><th>역할</th></tr></thead>
+      <thead><tr><th>step</th><th>작업</th><th>예시 (Jira 티켓 도메인)</th></tr></thead>
       <tbody>
-        <tr><td><strong>PreToolUse</strong></td><td>tool 호출 <em>직전</em></td><td>가드레일 · 위험 인자 · 짧은 제목 · 중복 차단</td></tr>
-        <tr><td><strong>PostToolUse</strong></td><td>tool 호출 <em>직후</em></td><td>알림 · 후속 작업 · 임계 초과 시 webhook</td></tr>
-        <tr><td><strong>SessionStart</strong></td><td>세션 시작 시점</td><td>brief · 어제 운영 요약 자동 출력</td></tr>
+        <tr><td>1</td><td>도메인 결정</td><td>"운영 티켓 자동 분류"</td></tr>
+        <tr><td>2</td><td>entity 후보 5~9개</td><td>Ticket · Reporter · Assignee · Category · Status · Priority</td></tr>
+        <tr><td>3</td><td>관계 후보 3~7개</td><td>Reporter→creates→Ticket / Assignee→handles→Ticket / Ticket→has→Category</td></tr>
+        <tr><td>4</td><td>한 줄 명세</td><td>각 node/edge "이건 무엇" 한 줄</td></tr>
+        <tr><td>5</td><td>YAML 작성</td><td>OpenCrab ingest 형식</td></tr>
+        <tr><td>6</td><td><code class="inline">ontology_ingest(yaml)</code></td><td>로컬 instance</td></tr>
+        <tr><td>7</td><td><code class="inline">ontology_query("...")</code></td><td>자연어 → 그래프 traversal</td></tr>
+        <tr><td>8</td><td>회사 도구 연동</td><td>Jira ticket ID · Confluence page ID를 node 속성으로 연결</td></tr>
+        <tr><td>9</td><td>MCP 통합</td><td>14차시 MCP resource 슬롯에 ontology 노출 → AI 자동 참조</td></tr>
       </tbody>
     </table>
 
-    <h3><span class="step-num">2</span>실습 ① | hooks.json 본인 환경 복사</h3>
-    <div class="track instr">
-      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
-      <pre style="white-space: pre-wrap;">"내 MCP 설정 파일의 hooks 섹션에 pos-ops-mcp/hooks/hooks.json 내용 추가해줘. PreToolUse·PostToolUse·SessionStart 3종, POS_OPS_ROOT 환경변수는 내 repo 경로로."</pre>
-    </div>
-
-    <h3><span class="step-num">3</span>실습 ② | PreToolUse 가드레일 검증</h3>
-    <pre># 짧은 title은 자동 거부
-echo '{"tool_args":{"title":"ab","body":"."}}' | \
-  python3 hooks/guard_ticket.py
-# → {"decision":"block","reason":"title 너무 짧음 (2자) | 5자 이상 필요"}
-# → exit 2 (Claude Code 표준 block code)</pre>
-
-    <h3><span class="step-num">4</span>실습 ③ | PostToolUse 자동 알림 검증</h3>
-    <pre>echo '{"tool_result":{"top_issue":"POS_DOWN","anomalies":{"POS_DOWN":15}}}' | \
-  python3 hooks/on_anomaly.py
-# 🚨 [HOOK] POS 운영 알림 · TOP ISSUE POS_DOWN (15건)
-#   영향 매장: ['SEL-001']
-#   권장: anomaly-triage skill 실행 또는 create_ticket 호출</pre>
-
-    <h3><span class="step-num">5</span>실습 ④ | SessionStart morning brief</h3>
-    <pre>python3 hooks/morning_brief.py
-# ☀ [HOOK] Morning Brief · 2026-05-13
-#   거래 8,181 · 매출 ₩347,640,500 · 이상 12.9%
-#   주의 매장 Top 3 (이상 비율):
-#     · GYG-001  14.5% (113/777)
-#     · SEL-001  14.1% (128/908)
-#     · ICN-001  13.5% (108/802)</pre>
-
-    <h3><span class="step-num">6</span>실습 ⑤ | HTML 대시보드 + 자연어 한 줄 5단계 chain</h3>
+    <h3><span class="step-num">4</span>HTML 대시보드 + 자연어 한 줄 chain</h3>
     <p>매장별 KPI · 시간대별 거래 · 이상 유형 분포 · 미해결 티켓 한눈에. <a href="dashboard.html">→ 대시보드 보기</a></p>
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
       <pre style="white-space: pre-wrap;">"POS_DOWN 강남역점 30분째. 매뉴얼 §3 조치 절차 인용하고 P1으로 티켓 만들어줘"</pre>
     </div>
-    <pre>자동 chain (MCP + Hook + QMD 합작):
+    <pre>자동 chain (MCP + Hook + QMD + OpenCrab 합작):
   1. detect_anomaly(window_min=30, store="SEL-001") → top_issue=POS_DOWN
   2. qmd query "POS_DOWN 조치" → 매뉴얼 §3.1 5단계 인용
-  3. PreToolUse guard_ticket → title 5자 이상 / P1 body 30자 이상 검증
-  4. create_ticket(title, body=매뉴얼 인용+사례, priority=P1)
-  5. PostToolUse on_anomaly → 자동 알림 (stdout · Discord webhook)</pre>
+  3. ontology_query → 영향 entity·티켓·담당자 traversal
+  4. PreToolUse guard_ticket → title 5자·P1 body 30자 검증
+  5. create_ticket(title, body=매뉴얼 인용+사례, priority=P1)
+  6. PostToolUse on_anomaly → 자동 알림</pre>
 
     <div class="field-case">
-      Day 4 산출물 · <strong>"본인 Copilot CLI 한 줄 → 5단계 자동 chain"</strong>. 탐지 (MCP) → 매뉴얼 검색 (QMD) → 가드 (Hook PreToolUse) → 티켓 생성 (MCP) → 알림 (Hook PostToolUse). 외부 API 0건, 데이터 외부 유출 0건. 이게 "AI Agent 인프라 모니터링 실시간 관제"의 한 사이클 minimum.
+      Day 4 산출물 · <strong>"Copilot CLI 한 줄 → 6단계 자동 chain"</strong>. 탐지 (MCP) → 매뉴얼 검색 (QMD) → 의미 layer (OpenCrab) → 가드 (Hook) → 티켓 생성 (MCP) → 알림 (Hook). 외부 API 0건, 데이터 외부 유출 0건. AI Agent 인프라 모니터링 실시간 관제 한 사이클.
     </div>
 
     <div class="check-list">
       <h4>✓ 16차시 체크포인트</h4>
       <ul>
-        <li>hooks.json 본인 MCP 설정 추가 + CLI 재시작</li>
-        <li>guard_ticket → 짧은 title block (exit 2)</li>
-        <li>on_anomaly → 임계 초과 시 알림 / 미만 시 silent</li>
-        <li>morning_brief → 어제 매장 Top 3 brief 출력</li>
-        <li>자연어 한 줄 → 5단계 자동 chain 동작</li>
-        <li>HTML 대시보드 4 차트 + 티켓 표 렌더링</li>
+        <li>OpenCrab MCP 설치 + 등록 + 동작 확인</li>
+        <li>사내 문서 ingest + ontology_query 자연어 검색</li>
+        <li>본인 도메인 9 step ontology YAML 1개 작성</li>
+        <li>자연어 한 줄 → 6단계 자동 chain 동작</li>
+        <li>HTML 대시보드 렌더링</li>
       </ul>
     </div>
   </div>
