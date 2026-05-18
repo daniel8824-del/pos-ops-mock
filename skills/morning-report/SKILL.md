@@ -3,7 +3,7 @@ name: morning-report
 description: 매일 아침 운영팀에게 어제 하루 매장 운영 상태 요약 보고서 자동 생성. 매장별 KPI (거래 건수·매출·이상 비율) + Top 3 이슈 + 미해결 티켓 목록 + 오늘 주의 매장. Use when 사용자가 "어제 운영 요약", "morning report", "데일리 리포트", "출근 보고서" 요청하거나, SessionStart 시 자동 발동.
 ---
 
-# Morning Report — 어제 운영 한눈에
+# Morning Report | 어제 운영 한눈에
 
 ## 언제 발동
 
@@ -33,7 +33,7 @@ detect_anomaly(window_min=1440)   # 24시간
 ## 출력 포맷
 
 ```
-☀ Morning Report — 2026-05-14 (어제 운영 요약)
+☀ Morning Report | 2026-05-14 (어제 운영 요약)
 ═════════════════════════════════════════════
 
 📊 전국 합계
@@ -51,8 +51,8 @@ detect_anomaly(window_min=1440)   # 24시간
   3. 대구 동성로점  13.7%  (STOCK_SHORTAGE 11건)
 
 📋 미해결 티켓 5건
-  - OPS-A8F2 (P1) 강남역점 POS_DOWN — 어제 22:14 생성
-  - INC-1098 (P2) 명동점 카드 승인 거부 — 3일째 in_progress
+  - OPS-A8F2 (P1) 강남역점 POS_DOWN | 어제 22:14 생성
+  - INC-1098 (P2) 명동점 카드 승인 거부 | 3일째 in_progress
   - ...
 
 🎯 오늘 주의

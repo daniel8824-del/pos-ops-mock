@@ -1,4 +1,4 @@
-"""UserPromptSubmit hook — 사용자 프롬프트에 운영 키워드 감지 시
+"""UserPromptSubmit hook | 사용자 프롬프트에 운영 키워드 감지 시
 ontology 컨텍스트 자동 주입.
 
 발동 키워드:
@@ -28,18 +28,18 @@ if not any(k in prompt for k in KEYWORDS):
     sys.exit(0)
 
 # 강의용 mock ontology 컨텍스트 (실제 강의에선 yucrates ontology_query 호출)
-context = """[POS 운영 ONTOLOGY 컨텍스트 — 자동 주입]
+context = """[POS 운영 ONTOLOGY 컨텍스트 | 자동 주입]
 
 도메인 entity 9:
   Store(매장) · POS_Machine(POS 단말) · Transaction(거래) · Product(SKU)
   Employee(직원) · Customer(고객) · ErrorEvent(에러) · IssueTicket(티켓) · Alert(알림)
 
 관계 5:
-  Transaction —executed_at→ POS_Machine
-  Transaction —contains→ Product
-  ErrorEvent —triggers→ Alert
-  Alert —escalates_to→ IssueTicket
-  Employee —handles→ IssueTicket
+  Transaction |executed_at→ POS_Machine
+  Transaction |contains→ Product
+  ErrorEvent |triggers→ Alert
+  Alert |escalates_to→ IssueTicket
+  Employee |handles→ IssueTicket
 
 본 작업에 사용 가능한 MCP tool:
   - mcp__pos-ops__get_logs(store, status, limit)

@@ -250,7 +250,7 @@
     </table>
 
     <h3><span class="step-num">2</span>pos-ops MCP 서버가 실제로 하는 일</h3>
-    <p>본 강의용 pos-ops MCP server는 <strong>tool 슬롯에 3개 함수만</strong> 노출 (resource · prompt 슬롯은 비워둠 — 강의 단순화). POS 운영팀의 핵심 일 3가지를 AI에 연결하는 구조. 본 mock은 시뮬레이션 데이터로 동작하지만, <strong>학습자가 본인 회사 환경에 적용</strong>할 때 우측 컬럼처럼 실제 도구로 1:1 교체하면 그대로 운영 시스템이 됩니다.</p>
+    <p>본 강의용 pos-ops MCP server는 <strong>tool 슬롯에 3개 함수만</strong> 노출 (resource · prompt 슬롯은 비워둠 | 강의 단순화). POS 운영팀의 핵심 일 3가지를 AI에 연결하는 구조. 본 mock은 시뮬레이션 데이터로 동작하지만, <strong>학습자가 본인 회사 환경에 적용</strong>할 때 우측 컬럼처럼 실제 도구로 1:1 교체하면 그대로 운영 시스템이 됩니다.</p>
     <table>
       <thead><tr><th>tool</th><th>운영 의미 (이 함수가 하는 일)</th><th>본인 회사 환경 적용 시 (mock 교체 대상)</th></tr></thead>
       <tbody>
@@ -272,7 +272,7 @@
       </tbody>
     </table>
     <p style="font-size: 13px; color: var(--muted);"><strong>외부 도구 한 줄 소개</strong> | <em>Splunk · Datadog</em> = 로그 수집 · 검색 플랫폼. <em>PagerDuty</em> = 장애 알림 + on-call. <em>Grafana</em> = 지표 시각화 + 알람. <em>JIRA · ServiceNow</em> = 이슈 트래커 / 운영 티켓 관리. 이미 회사에서 쓰는 도구가 있다면 그것의 API/CLI로 교체.</p>
-    <p style="font-size: 14px;">→ 학습자가 AI에게 <strong>"최근 이상 있어?"</strong> 한 줄을 던지면, AI가 위 3 tool을 알아서 chain — 탐지 → 진단 → 티켓 자동. <strong>회사 내부 도구를 AI에 안전하게 연결하는 표준 인터페이스가 MCP의 본질.</strong></p>
+    <p style="font-size: 14px;">→ 학습자가 AI에게 <strong>"최근 이상 있어?"</strong> 한 줄을 던지면, AI가 위 3 tool을 알아서 chain | 탐지 → 진단 → 티켓 자동. <strong>회사 내부 도구를 AI에 안전하게 연결하는 표준 인터페이스가 MCP의 본질.</strong></p>
 
     <h3><span class="step-num">3</span>실습 ① | 설치 + 등록 (자연어 한 줄)</h3>
     <div class="track instr">

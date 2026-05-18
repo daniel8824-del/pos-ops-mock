@@ -1,4 +1,4 @@
-"""PostToolUse hook — detect_anomaly 호출 후 자동 알림.
+"""PostToolUse hook | detect_anomaly 호출 후 자동 알림.
 
 발동: mcp__pos-ops__detect_anomaly tool 실행 직후
 조건: top_issue 가 임계값(threshold.yaml) 초과
@@ -45,7 +45,7 @@ msg = (
     f"  자동 사이클: anomaly-triage skill로 1차 진단 후 티켓 생성 권장"
 )
 
-# 강의용 — stdout
+# 강의용 | stdout
 print(msg)
 
 # 학습자 환경: Discord webhook

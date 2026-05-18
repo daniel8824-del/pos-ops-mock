@@ -1,5 +1,5 @@
 {
-  "_comment": "강의용 hook 설정 — PostToolUse (자동 알림) + UserPromptSubmit (ontology 자동 주입). 학습자 환경 (Claude Code 또는 Copilot CLI)에 그대로 복사 가능.",
+  "_comment": "강의용 hook 설정 | PostToolUse (자동 알림) + UserPromptSubmit (ontology 자동 주입). 학습자 환경 (Claude Code 또는 Copilot CLI)에 그대로 복사 가능.",
 
   "hooks": {
     "PostToolUse": [

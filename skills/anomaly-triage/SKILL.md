@@ -3,7 +3,7 @@ name: anomaly-triage
 description: 최근 POS 거래 로그에서 이상을 탐지하고, 1차 진단 + 운영 티켓 자동 생성까지 한 사이클로 처리. Use when 사용자가 "최근 이상 있어?", "POS 문제 확인", "운영 모니터링" 등 운영 상태 점검을 요청하거나, 알림에서 이상 패턴이 감지되었을 때.
 ---
 
-# Anomaly Triage — POS 운영 1차 자동화
+# Anomaly Triage | POS 운영 1차 자동화
 
 ## 언제 발동
 
@@ -50,7 +50,7 @@ query_ontology("최근 30일간 같은 매장에서 발생한 <top_issue> 사례
 
 ```
 create_ticket(
-  title="<top_issue> @ <매장명> — count 폭주",
+  title="<top_issue> @ <매장명> | count 폭주",
   body="[탐지 결과 요약]\n[매뉴얼 인용]\n[과거 사례 3건]\n[권장 조치 1순위]",
   priority=<우선순위>,
   store=<영향 매장 ID>,

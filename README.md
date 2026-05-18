@@ -65,7 +65,7 @@ qmd update
 qmd query "POS 단말 다운 해결" -c pos-manuals
 ```
 
-## 학습자 환경 — Claude Code / Copilot CLI mcp.json
+## 학습자 환경 | Claude Code / Copilot CLI mcp.json
 
 ```json
 {
@@ -94,7 +94,7 @@ qmd query "POS 단말 다운 해결" -c pos-manuals
 |---|---|---|
 | MCP 개발 + Copilot 연결 | mcp_server/ + skills/ | 13차시 |
 | Hook 자동화 (가드레일) | hooks/ | 14·8차시 |
-| 멀티에이전트 (별도) | — | 15차시 |
+| 멀티에이전트 (별도) | | | 15차시 |
 | yucrates 온톨로지 | ontology/ | 16-A |
 | 문서 청킹·보관 (QMD) | manuals/ + Day 3 QMD 재사용 | 16-B |
 | 운영 대시보드 | dashboard/ | 16-C·17차시 |
@@ -109,4 +109,4 @@ qmd query "POS 단말 다운 해결" -c pos-manuals
 ## 한 줄 메시지
 
 **"본인 노트가 100~5만 파일 사이라면 QMD를 1차로,**
-**보강이 필요할 때만 GBrain·Graphify·yucrates를 얹는다 — 전부 로컬, 0원."**
+**보강이 필요할 때만 GBrain·Graphify·yucrates를 얹는다 | 전부 로컬, 0원."**
