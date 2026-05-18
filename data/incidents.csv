@@ -1,0 +1,51 @@
+ticket_id,created_at,store_id,category,title,priority,status,assignee
+INC-1000,2026-05-07,DJN-001,inventory,재고 수량 불일치 (실재고 vs 시스템),P3-Medium,resolved,unassigned
+INC-1001,2026-04-08,BSN-001,payment,결제 단말 timeout 빈발,P3-Medium,open,ops-team1
+INC-1002,2026-04-22,GYG-001,payment,결제 단말 timeout 빈발,P3-Medium,open,unassigned
+INC-1003,2026-04-23,SEL-002,inventory,재고 수량 불일치 (실재고 vs 시스템),P3-Medium,resolved,field-eng
+INC-1004,2026-04-07,BSN-001,inventory,재고 수량 불일치 (실재고 vs 시스템),P3-Medium,resolved,field-eng
+INC-1005,2026-05-02,SEL-003,device,POS 단말 갑작스러운 재부팅,P1-Critical,resolved,ops-team2
+INC-1006,2026-04-30,BSN-001,payment,카드 승인 거부 — 카드사 연동 오류,P4-Low,open,field-eng
+INC-1007,2026-05-09,USN-001,customer,고객 컴플레인 — 가격 불일치,P1-Critical,open,field-eng
+INC-1008,2026-04-20,DJN-001,inventory,베스트셀러 SKU 품절 알림 누락,P2-High,in_progress,unassigned
+INC-1009,2026-04-23,ICN-001,payment,카드 승인 거부 — 카드사 연동 오류,P2-High,open,ops-team1
+INC-1010,2026-05-11,ICN-001,inventory,베스트셀러 SKU 품절 알림 누락,P3-Medium,resolved,ops-team1
+INC-1011,2026-04-14,DGU-001,device,프린터 영수증 출력 실패,P2-High,in_progress,unassigned
+INC-1012,2026-04-29,SEL-003,customer,고객 컴플레인 — 가격 불일치,P3-Medium,open,ops-team1
+INC-1013,2026-04-22,USN-001,device,바코드 스캐너 인식률 저하,P1-Critical,resolved,ops-team2
+INC-1014,2026-04-16,USN-001,staff,교대 시 POS 로그아웃 안 됨,P1-Critical,resolved,ops-team2
+INC-1015,2026-04-20,SEL-003,inventory,베스트셀러 SKU 품절 알림 누락,P2-High,open,field-eng
+INC-1016,2026-04-23,USN-001,inventory,재고 수량 불일치 (실재고 vs 시스템),P3-Medium,resolved,field-eng
+INC-1017,2026-05-01,DGU-001,payment,결제 단말 timeout 빈발,P2-High,open,unassigned
+INC-1018,2026-04-14,GYG-001,device,바코드 스캐너 인식률 저하,P2-High,in_progress,field-eng
+INC-1019,2026-05-04,DGU-001,network,본사 동기화 지연 — 재고 정보 불일치,P1-Critical,resolved,field-eng
+INC-1020,2026-04-23,DJN-001,payment,결제 단말 timeout 빈발,P3-Medium,resolved,ops-team2
+INC-1021,2026-04-11,BSN-001,device,바코드 스캐너 인식률 저하,P3-Medium,in_progress,ops-team1
+INC-1022,2026-04-20,SEL-002,staff,직원 권한 없음 — 환불 처리 불가,P3-Medium,open,unassigned
+INC-1023,2026-05-09,BSN-001,inventory,베스트셀러 SKU 품절 알림 누락,P4-Low,resolved,field-eng
+INC-1024,2026-04-05,ICN-001,network,매장 인터넷 끊김 — 결제 불가 30분,P4-Low,resolved,field-eng
+INC-1025,2026-05-01,DJN-001,payment,카드 승인 거부 — 카드사 연동 오류,P3-Medium,resolved,ops-team1
+INC-1026,2026-05-11,SEL-003,customer,고객 컴플레인 — 가격 불일치,P4-Low,resolved,field-eng
+INC-1027,2026-04-08,BSN-001,payment,카드 승인 거부 — 카드사 연동 오류,P1-Critical,resolved,field-eng
+INC-1028,2026-04-09,ICN-001,network,본사 동기화 지연 — 재고 정보 불일치,P4-Low,resolved,ops-team2
+INC-1029,2026-04-27,SEL-001,payment,카드 승인 거부 — 카드사 연동 오류,P2-High,resolved,unassigned
+INC-1030,2026-04-10,USN-001,device,바코드 스캐너 인식률 저하,P3-Medium,in_progress,unassigned
+INC-1031,2026-04-05,SEL-003,customer,고객 컴플레인 — 가격 불일치,P4-Low,resolved,unassigned
+INC-1032,2026-04-28,DJN-001,inventory,베스트셀러 SKU 품절 알림 누락,P2-High,in_progress,ops-team1
+INC-1033,2026-04-23,USN-001,staff,교대 시 POS 로그아웃 안 됨,P3-Medium,resolved,ops-team1
+INC-1034,2026-04-17,GYG-001,network,본사 동기화 지연 — 재고 정보 불일치,P4-Low,in_progress,unassigned
+INC-1035,2026-04-17,GWJ-001,device,바코드 스캐너 인식률 저하,P2-High,in_progress,ops-team1
+INC-1036,2026-04-02,SEL-002,payment,카드 승인 거부 — 카드사 연동 오류,P3-Medium,resolved,unassigned
+INC-1037,2026-04-12,SEL-003,inventory,베스트셀러 SKU 품절 알림 누락,P3-Medium,open,field-eng
+INC-1038,2026-04-03,DGU-001,customer,고객 컴플레인 — 가격 불일치,P4-Low,resolved,ops-team2
+INC-1039,2026-04-12,SEL-003,staff,직원 권한 없음 — 환불 처리 불가,P3-Medium,in_progress,ops-team2
+INC-1040,2026-04-03,SEL-003,device,프린터 영수증 출력 실패,P3-Medium,open,ops-team1
+INC-1041,2026-04-18,GWJ-001,inventory,베스트셀러 SKU 품절 알림 누락,P3-Medium,resolved,unassigned
+INC-1042,2026-04-17,DGU-001,network,본사 동기화 지연 — 재고 정보 불일치,P2-High,open,field-eng
+INC-1043,2026-04-25,ICN-001,network,매장 인터넷 끊김 — 결제 불가 30분,P2-High,open,ops-team2
+INC-1044,2026-05-02,SEL-002,staff,직원 권한 없음 — 환불 처리 불가,P3-Medium,resolved,unassigned
+INC-1045,2026-04-13,ICN-001,staff,교대 시 POS 로그아웃 안 됨,P3-Medium,resolved,field-eng
+INC-1046,2026-05-09,GWJ-001,inventory,베스트셀러 SKU 품절 알림 누락,P2-High,in_progress,ops-team1
+INC-1047,2026-05-02,ICN-001,staff,직원 권한 없음 — 환불 처리 불가,P2-High,resolved,unassigned
+INC-1048,2026-04-23,GWJ-001,network,매장 인터넷 끊김 — 결제 불가 30분,P4-Low,resolved,unassigned
+INC-1049,2026-05-10,ICN-001,device,바코드 스캐너 인식률 저하,P3-Medium,open,field-eng
