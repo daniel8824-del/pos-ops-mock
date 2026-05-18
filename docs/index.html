@@ -181,7 +181,7 @@
 <section id="flow">
   <div class="container">
     <span class="section-tag">§ Day 4 전체 흐름</span>
-    <h2>4차시 한 사이클 — <span class="accent">탐지 → 가드 → 분담 → 보고</span></h2>
+    <h2>4차시 한 사이클 | <span class="accent">탐지 → 가드 → 분담 → 보고</span></h2>
     <div class="day-timeline">
       <div class="day-cell">
         <span class="day-time">09:00 – 10:00 (60분)</span>
@@ -196,7 +196,7 @@
       <div class="day-cell">
         <span class="day-time">11:00 – 12:00 (60분)</span>
         <div class="ttl">15차시 | 멀티에이전트</div>
-        <div class="desc">4 패턴 — 오케스트레이터 · Agent Teams · 멀티터미널 · 전문가 위원회. cmux 데모.</div>
+        <div class="desc">4 패턴 | 오케스트레이터 · Agent Teams · 멀티터미널 · 전문가 위원회. cmux 데모.</div>
       </div>
       <div class="day-cell">
         <span class="day-time">12:00 – 13:00 (60분)</span>
@@ -223,11 +223,11 @@
       <div class="goal-text">MCP 서버를 <strong>직접 한 파일로</strong> 만들고, 학습자 본인 Copilot/Claude Code에 <strong>mcp.json 1줄</strong>로 연결. 3 tool (<code class="inline">get_logs</code> · <code class="inline">detect_anomaly</code> · <code class="inline">create_ticket</code>)이 자연어 한 줄로 자동 호출되는지 확인.</div>
     </div>
 
-    <figure style="margin: 24px 0; text-align: center;">
-      <img src="images/comics/03-mcp.png" alt="MCP 식당 메타포 — Day 2 리마인드"
-           style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border);">
-      <figcaption style="font-size: 13px; color: var(--muted); margin-top: 10px; font-style: italic;">
-        Day 2 리마인드 | <strong>MCP = 식당 주방의 표준 인터페이스</strong> — 어느 도구(POS · DB · 알림)든 같은 프로토콜로 연결.
+    <figure style="margin: 24px 0;">
+      <img src="images/comics/03-mcp.png" alt="MCP 식당 메타포 | Day 2 리마인드"
+           style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border); display: block;">
+      <figcaption style="font-size: 13px; color: var(--muted); margin-top: 10px; font-style: italic; text-align: left;">
+        Day 2 리마인드 | <strong>MCP = 식당 주방의 표준 인터페이스</strong> | 어느 도구(POS · DB · 알림)든 같은 프로토콜로 연결.
         (<a href="https://daniel8824-del.github.io/pos-day2/" target="_blank">Day 2 사이트</a> 만화 ③)
       </figcaption>
     </figure>
@@ -237,14 +237,14 @@
     <table>
       <thead><tr><th>슬롯</th><th>역할</th><th>예시</th></tr></thead>
       <tbody>
-        <tr><td><strong>tool</strong></td><td>실제 함수 — Python/Node 호출 가능</td><td><code class="inline">get_logs(store, since)</code></td></tr>
-        <tr><td><strong>resource</strong></td><td>정적/동적 데이터 — 매뉴얼·threshold</td><td><code class="inline">pos_runbook.md</code></td></tr>
-        <tr><td><strong>prompt</strong></td><td>안내 템플릿 — Claude Code 스킬과 동일 역할</td><td>"이상 탐지 → 진단 → 티켓"</td></tr>
+        <tr><td><strong>tool</strong></td><td>실제 함수 | Python/Node 호출 가능</td><td><code class="inline">get_logs(store, since)</code></td></tr>
+        <tr><td><strong>resource</strong></td><td>정적/동적 데이터 | 매뉴얼·threshold</td><td><code class="inline">pos_runbook.md</code></td></tr>
+        <tr><td><strong>prompt</strong></td><td>안내 템플릿 | Claude Code 스킬과 동일 역할</td><td>"이상 탐지 → 진단 → 티켓"</td></tr>
       </tbody>
     </table>
 
     <h3><span class="step-num">2</span>실습 ① | repo clone + venv</h3>
-    <div class="track instr" style="max-width: 600px;">
+    <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
       <pre>"github.com/daniel8824-del/pos-ops-mcp
 이거 clone 후 venv 만들고
@@ -305,9 +305,9 @@ mcp 패키지 설치해줘"</pre>
     <table>
       <thead><tr><th>종류</th><th>시점</th><th>역할</th></tr></thead>
       <tbody>
-        <tr><td><strong>PreToolUse</strong></td><td>tool 호출 <em>직전</em></td><td>가드레일 — 위험 인자·짧은 제목·중복 차단</td></tr>
-        <tr><td><strong>PostToolUse</strong></td><td>tool 호출 <em>직후</em></td><td>알림·후속 작업 — 임계 초과 시 webhook</td></tr>
-        <tr><td><strong>SessionStart</strong></td><td>세션 시작 시점</td><td>brief — 어제 운영 요약 자동 출력</td></tr>
+        <tr><td><strong>PreToolUse</strong></td><td>tool 호출 <em>직전</em></td><td>가드레일 | 위험 인자·짧은 제목·중복 차단</td></tr>
+        <tr><td><strong>PostToolUse</strong></td><td>tool 호출 <em>직후</em></td><td>알림·후속 작업 | 임계 초과 시 webhook</td></tr>
+        <tr><td><strong>SessionStart</strong></td><td>세션 시작 시점</td><td>brief | 어제 운영 요약 자동 출력</td></tr>
       </tbody>
     </table>
 
@@ -329,23 +329,23 @@ mcp 패키지 설치해줘"</pre>
   }
 }</pre>
 
-    <h3><span class="step-num">3</span>실습 ② | 가드레일 — 짧은 제목 차단</h3>
+    <h3><span class="step-num">3</span>실습 ② | 가드레일 | 짧은 제목 차단</h3>
     <pre># 짧은 title은 자동 거부
 echo '{"tool_args":{"title":"ab","body":"."}}' | \
   python3 hooks/guard_ticket.py
-# → {"decision":"block","reason":"title 너무 짧음 (2자) — 5자 이상 필요"}
+# → {"decision":"block","reason":"title 너무 짧음 (2자) | 5자 이상 필요"}
 # → exit 2 (Claude Code 표준 block code)</pre>
 
-    <h3><span class="step-num">4</span>실습 ③ | 자동 알림 — 임계 초과</h3>
+    <h3><span class="step-num">4</span>실습 ③ | 자동 알림 | 임계 초과</h3>
     <pre>echo '{"tool_result":{"top_issue":"POS_DOWN","anomalies":{"POS_DOWN":15}}}' | \
   python3 hooks/on_anomaly.py
-# 🚨 [HOOK] POS 운영 알림 — TOP ISSUE POS_DOWN (15건)
+# 🚨 [HOOK] POS 운영 알림 | TOP ISSUE POS_DOWN (15건)
 #   영향 매장: ['SEL-001']
 #   권장: anomaly-triage skill 실행 또는 create_ticket 호출</pre>
 
-    <h3><span class="step-num">5</span>실습 ④ | SessionStart — 어제 brief</h3>
+    <h3><span class="step-num">5</span>실습 ④ | SessionStart | 어제 brief</h3>
     <pre>python3 hooks/morning_brief.py
-# ☀ [HOOK] Morning Brief — 2026-05-13
+# ☀ [HOOK] Morning Brief | 2026-05-13
 #   거래 8,181 · 매출 ₩347,640,500 · 이상 12.9%
 #   주의 매장 Top 3 (이상 비율):
 #     - GYG-001  14.5% (113/777)
@@ -505,7 +505,7 @@ start dashboard\index.html      # Windows</pre>
     <strong>Day 4 교재 | MCP · 훅 · 멀티에이전트 · 운영 모니터링</strong> · 2026-05-19<br>
     이전: <a href="https://daniel8824-del.github.io/pos-day2/" target="_blank">Day 2</a> | <a href="https://daniel8824-del.github.io/rag-day3/" target="_blank">Day 3</a>
     · 다음: Day 5 (5/21) 실전 개발 사례 + 도입 전략<br>
-    공개 매장·SKU + 시뮬레이션 거래 — 실제 아모레퍼시픽 운영 데이터 아님
+    공개 매장·SKU + 시뮬레이션 거래 | 실제 아모레퍼시픽 운영 데이터 아님
   </div>
 </footer>
 
