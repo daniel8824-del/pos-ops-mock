@@ -232,8 +232,8 @@
       </figcaption>
     </figure>
 
-    <h3><span class="step-num">1</span>MCP 3 슬롯</h3>
-    <p>MCP는 <strong>Host(AI 앱) · Client(연결 담당) · Server(도구 제공자)</strong> 3 역할 구조. <strong>우리가 13차시에 만드는 건 Server.</strong></p>
+    <h3><span class="step-num">1</span>MCP 3 역할 구조</h3>
+    <p>MCP는 <strong>Host(AI 앱) · Client(연결 담당) · Server(도구 제공자)</strong> 3 역할 구조. <strong>우리가 만드는 건 Server.</strong></p>
     <ul style="font-size: 14px; color: var(--muted);">
       <li><strong>Host</strong> | Claude Code · Copilot · Cursor 같은 AI 앱</li>
       <li><strong>Client</strong> | Host 안에서 server 한 곳에 1:1 연결</li>
@@ -244,18 +244,43 @@
       <thead><tr><th>슬롯</th><th>역할</th><th>예시</th></tr></thead>
       <tbody>
         <tr><td><strong>tool</strong></td><td>실제 함수 | Python/Node 호출 가능</td><td><code class="inline">get_logs(store, since)</code></td></tr>
-        <tr><td><strong>resource</strong></td><td>정적/동적 데이터 | 매뉴얼·threshold</td><td><code class="inline">pos_runbook.md</code></td></tr>
+        <tr><td><strong>resource</strong></td><td>정적/동적 데이터 | 매뉴얼 · 임계값</td><td><code class="inline">pos_runbook.md</code></td></tr>
         <tr><td><strong>prompt</strong></td><td>안내 템플릿 | Claude Code 스킬과 동일 역할</td><td>"이상 탐지 → 진단 → 티켓"</td></tr>
       </tbody>
     </table>
 
-    <h3><span class="step-num">2</span>실습 ① | repo clone + venv</h3>
+    <h3><span class="step-num">2</span>pos-ops MCP 서버가 실제로 하는 일</h3>
+    <p>본 강의용 pos-ops MCP server는 <strong>POS 운영팀의 핵심 일 3가지</strong>를 AI에 노출:</p>
+    <table>
+      <thead><tr><th>tool</th><th>운영 의미</th><th>실무 port 시 교체할 부분</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><code class="inline">get_logs</code></td>
+          <td>매장 · 단말 · 상태별 거래 로그 조회</td>
+          <td>회사 POS DB / Splunk / Datadog API</td>
+        </tr>
+        <tr>
+          <td><code class="inline">detect_anomaly</code></td>
+          <td>최근 N분 이상 케이스 집계 + top issue 선정</td>
+          <td>회사 모니터링 룰 (PagerDuty · Grafana 알람)</td>
+        </tr>
+        <tr>
+          <td><code class="inline">create_ticket</code></td>
+          <td>운영 티켓 생성 (제목 · 본문 · 우선순위 · 매장)</td>
+          <td>JIRA · ServiceNow · GitHub Issues API</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 14px; color: var(--muted);">→ 학습자가 AI에게 <strong>"최근 이상 있어?"</strong> 한 줄을 던지면, AI가 위 3 tool을 알아서 chain — 탐지 → 진단 → 티켓 자동. <strong>회사 내부 도구를 AI에 안전하게 연결하는 표준 인터페이스가 MCP의 본질.</strong></p>
+
+    <h3><span class="step-num">3</span>실습 ① | 설치 + 등록 (자연어 한 줄)</h3>
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
       <pre style="white-space: pre-wrap;">"github.com/daniel8824-del/pos-ops-mcp 이거 clone 후 venv 만들고 mcp 패키지 설치한 다음, 내 MCP 설정 파일의 mcpServers 에 pos-ops 서버 추가해줘. 기존 서버는 보존하고, 끝나면 syntax 검증해줘."</pre>
     </div>
+    <p style="font-size: 13px; color: var(--muted);">AI가 자기 환경 CLI의 설정 위치를 알아서 찾음 (Claude Code = <code class="inline">~/.claude/settings.json</code> · Copilot CLI = <code class="inline">~/.copilot/mcp-config.json</code> · Cursor = <code class="inline">~/.cursor/mcp.json</code>). 등록 후 CLI 재시작.</p>
 
-    <h3><span class="step-num">3</span>실습 ② | 3 tool smoke 검증</h3>
+    <h3><span class="step-num">4</span>실습 ② | smoke 4종 통과 확인</h3>
     <pre>.venv/bin/python3 tests/test_smoke.py
 # OK  get_logs       (5 rows + filter)
 # OK  detect_anomaly  (total=221, top=POS_DOWN)
@@ -263,31 +288,32 @@
 # OK  mcp_server      (3 tools)
 # ✓ all 4 tests passed</pre>
 
-    <h3><span class="step-num">3</span>실습 ③ | Copilot / Claude Code 연결</h3>
-    <p>본인 환경 설정 파일 (Claude Code = <code class="inline">~/.claude/settings.json</code> · Copilot CLI = <code class="inline">.copilot/settings.json</code>)에 추가:</p>
-    <pre>{
-  "mcpServers": {
-    "pos-ops": {
-      "command": "/home/daniel/pos-ops-mcp/.venv/bin/python3",
-      "args": ["/home/daniel/pos-ops-mcp/mcp_server/server.py"]
-    }
+    <h3><span class="step-num">5</span>실습 ③ | 자연어 한 줄로 운영 사이클 시연</h3>
+    <p>등록 + smoke 통과 후 본인 CLI에서 자연어 한 줄:</p>
+    <pre>"최근 1시간 이상 거래 있어? 1순위 이슈만 P2로 티켓 만들어줘"
+
+# AI가 자동 chain:
+#   1. detect_anomaly(window_min=60) → top_issue + count + 영향 매장
+#   2. create_ticket(title, body, priority=P2-High, store, category) → OPS-XXXX</pre>
+
+    <div class="reference">
+      <p><strong>참고 | 자연어 거치지 않고 직접 편집할 경우</strong> | 설정 파일에 다음 객체를 <code class="inline">mcpServers</code> 안에 추가 (기존 서버 보존). 경로는 본인 환경에 맞게 교체:</p>
+      <pre style="margin-top: 8px;">{
+  "pos-ops": {
+    "command": "/home/daniel/pos-ops-mcp/.venv/bin/python3",
+    "args": ["/home/daniel/pos-ops-mcp/mcp_server/server.py"]
   }
 }</pre>
-
-    <h3><span class="step-num">4</span>실습 ④ | 자연어 한 줄 시연</h3>
-    <pre>"최근 1시간 이상 거래 있어?
-1순위 이슈만 P2로 티켓 만들어줘"
-
-# 자동 chain:
-#   1. detect_anomaly(window_min=60) → top_issue, count
-#   2. create_ticket(title, body, priority=P2-High, ...) → OPS-XXXX</pre>
+    </div>
 
     <div class="check-list">
       <h4>✓ 13차시 체크포인트</h4>
       <ul>
+        <li>MCP 3 역할 (Host · Client · Server)과 우리가 만드는 건 Server 명확</li>
+        <li>pos-ops 서버가 노출하는 3 tool과 실무 port 대상 인지</li>
         <li>본인 환경에서 <code class="inline">tests/test_smoke.py</code> 4/4 통과</li>
-        <li>Copilot/Claude Code에서 <code class="inline">@pos-ops</code> tool 목록 확인</li>
-        <li>자연어 한 줄로 detect → create_ticket chain 동작</li>
+        <li>본인 CLI에서 <code class="inline">@pos-ops</code> tool 목록 확인</li>
+        <li>자연어 한 줄 → detect → create_ticket chain 자동 동작</li>
       </ul>
     </div>
   </div>
