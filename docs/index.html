@@ -348,7 +348,7 @@ def runbook() -> str:
     <p style="font-size: 13px; color: var(--muted);">→ rag-day3 QMD와 차이: QMD는 로컬 노트 검색용, MCP resource는 AI가 tool 호출 시 자동 참조하는 컨텍스트.</p>
 
     <h3><span class="step-num">4</span>실습 ③ | prompt 슬롯에 스킬 박기 (10분)</h3>
-    <p>Claude Code 스킬과 동일 역할 — AI에게 "이렇게 행동해라" 안내 템플릿. MCP 1 패키지 안에 통합 배포:</p>
+    <p>Claude Code 스킬과 동일 역할 | AI에게 "이렇게 행동해라" 안내 템플릿. MCP 1 패키지 안에 통합 배포:</p>
     <pre>@mcp.prompt()
 def anomaly_triage() -> str:
     """이상 탐지 → 진단 → 티켓 5단계 흐름."""
@@ -365,9 +365,9 @@ def anomaly_triage() -> str:
       <thead><tr><th>한계</th><th>도시바·아모레 환경 적용 시 고민</th></tr></thead>
       <tbody>
         <tr><td><strong>토큰 폭주</strong></td><td>tool chain이 깊어지면 비용 + 컨텍스트 폭주 → Caveman/RTK · model 라우팅으로 절감</td></tr>
-        <tr><td><strong>인증</strong></td><td>사내 API OAuth · API key · 사용자 위임 — 어떻게 안전하게 보관</td></tr>
+        <tr><td><strong>인증</strong></td><td>사내 API OAuth · API key · 사용자 위임 | 어떻게 안전하게 보관</td></tr>
         <tr><td><strong>권한</strong></td><td>모두 같은 tool 호출 가능? 운영자/관전자 분리 (PreToolUse 가드)</td></tr>
-        <tr><td><strong>사내망 격리</strong></td><td>stdio MCP 외 remote (HTTP) MCP는 사내망에서 어떻게 — VPN 게이트웨이</td></tr>
+        <tr><td><strong>사내망 격리</strong></td><td>stdio MCP 외 remote (HTTP) MCP는 사내망에서 어떻게 | VPN 게이트웨이</td></tr>
         <tr><td><strong>가드레일 누락</strong></td><td>AI가 잘못된 인자 호출 → 실제 운영 사고 (DB 수정 · 외부 알림 폭주)</td></tr>
       </tbody>
     </table>
@@ -395,7 +395,7 @@ def anomaly_triage() -> str:
       <div class="goal-text">멀티에이전트 4 패턴 <strong>언급만</strong> (하네스 + MCP 잘 만들면 자연 해결). 그 시간 위에 <strong>사내 문서 → QMD 인덱싱</strong> (Day 3 재방문) + <strong>yucrates(OpenCrab) MCP 복제 후 본인 업무 도메인 9단계 개인 온톨로지</strong> 직접 모델링.</div>
     </div>
 
-    <h3><span class="step-num">1</span>멀티에이전트 4 패턴 — 언급만 (15분)</h3>
+    <h3><span class="step-num">1</span>멀티에이전트 4 패턴 | 언급만 (15분)</h3>
     <table>
       <thead><tr><th>패턴</th><th>한 줄</th><th>예시 도구</th></tr></thead>
       <tbody>
@@ -406,7 +406,7 @@ def anomaly_triage() -> str:
       </tbody>
     </table>
     <div class="reference">
-      <p>본 강의에서 <strong>서브에이전트 · 팀 체제는 깊이 다루지 않음</strong>. 하네스(13·14차시 MCP) + 명확한 도구 정의가 우선 — 그 위에 멀티 패턴은 자연 합류. 깊이 들어가는 건 별도 워크숍 권장.</p>
+      <p>본 강의에서 <strong>서브에이전트 · 팀 체제는 깊이 다루지 않음</strong>. 하네스(13·14차시 MCP) + 명확한 도구 정의가 우선 | 그 위에 멀티 패턴은 자연 합류. 깊이 들어가는 건 별도 워크숍 권장.</p>
     </div>
 
     <h3><span class="step-num">2</span>로컬 RAG 재방문 | 사내 문서 QMD 인덱싱 (15분)</h3>
@@ -418,20 +418,20 @@ def anomaly_triage() -> str:
     <p style="font-size: 13px; color: var(--muted);">→ 인덱싱이 끝나면 MCP의 resource 슬롯(14차시 §3)에 동일 폴더를 노출 → AI가 tool 호출 시 자동 컨텍스트 가져감. 두 layer가 합쳐짐.</p>
 
     <h3><span class="step-num">3</span>yucrates(OpenCrab) MCP 복제 (10분)</h3>
-    <p>강사 본인 yucrates 원본을 복제해서 학습자 환경 또는 사내용으로 변형. 학술적 메타-온톨로지 (canonicalize · promotion · schema_pack · identity) 노출 X — <strong>9단계 개인 모델링만 사용</strong>:</p>
+    <p>강사 본인 yucrates 원본을 복제해서 학습자 환경 또는 사내용으로 변형. 학술적 메타-온톨로지 (canonicalize · promotion · schema_pack · identity) 노출 X | <strong>9단계 개인 모델링만 사용</strong>:</p>
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
       <pre style="white-space: pre-wrap;">"github 의 OpenCrab MCP repo clone 한 다음, 내 환경용으로 단순화(canonicalize·promotion·schema_pack·identity 비활성)해서 ontology_query / ontology_impact / add_node / add_edge 4 tool만 노출하게 wrapper 만들어줘. 내 MCP 설정 파일에 등록까지."</pre>
     </div>
 
-    <h3><span class="step-num">4</span>9단계 개인 온톨로지 — 본인 도메인 (20분)</h3>
-    <p>학습자가 <strong>본인 업무 도메인을 직접 선택</strong>. POS 운영, Jira 티켓, Confluence 매뉴얼, 사내 프로젝트 관리, 일정·이메일 — 어느 영역이든 가능. 9 step 진행:</p>
+    <h3><span class="step-num">4</span>9단계 개인 온톨로지 | 본인 도메인 (20분)</h3>
+    <p>학습자가 <strong>본인 업무 도메인을 직접 선택</strong>. POS 운영, Jira 티켓, Confluence 매뉴얼, 사내 프로젝트 관리, 일정·이메일 | 어느 영역이든 가능. 9 step 진행:</p>
     <table>
       <thead><tr><th>step</th><th>작업</th><th>예시 (학습자 도메인 1)</th></tr></thead>
       <tbody>
         <tr><td>1</td><td>도메인 결정</td><td>"운영 티켓 자동 분류"</td></tr>
         <tr><td>2</td><td>entity 후보 5~9개 추출</td><td>Ticket · Reporter · Assignee · Category · Status · Priority</td></tr>
-        <tr><td>3</td><td>관계 후보 3~7개</td><td>Reporter—creates→Ticket · Assignee—handles→Ticket · Ticket—has→Category</td></tr>
+        <tr><td>3</td><td>관계 후보 3~7개</td><td>Reporter|creates→Ticket · Assignee|handles→Ticket · Ticket|has→Category</td></tr>
         <tr><td>4</td><td>한 줄 명세</td><td>각 node/edge "이건 무엇" 한 줄 설명</td></tr>
         <tr><td>5</td><td>YAML 작성</td><td>yucrates ingest 형식</td></tr>
         <tr><td>6</td><td><code class="inline">ontology_ingest(yaml)</code></td><td>강사 instance 또는 본인 인스턴스</td></tr>
@@ -441,10 +441,10 @@ def anomaly_triage() -> str:
       </tbody>
     </table>
 
-    <p style="font-size: 14px; color: var(--muted);"><strong>도메인 다양화 안내</strong> | POS만의 예시 X. 학습자 본인 일상 업무 영역 — 일정 관리 / 이메일 분류 / 코드 리뷰 / 사내 위키 / 고객 문의 / 프로젝트 일정 — 무엇이든 9 step 동일.</p>
+    <p style="font-size: 14px; color: var(--muted);"><strong>도메인 다양화 안내</strong> | POS만의 예시 X. 학습자 본인 일상 업무 영역 | 일정 관리 / 이메일 분류 / 코드 리뷰 / 사내 위키 / 고객 문의 / 프로젝트 일정 | 무엇이든 9 step 동일.</p>
 
     <div class="field-case">
-      이 9단계는 <strong>학술 온톨로지가 아닌 운영 모델링</strong>. 회사 도메인을 AI가 이해할 수 있게 노드·관계로 정리하면, MCP tool 호출 시 의미 layer가 자동 합류 — "강남역 매장 결제 실패" 한 줄에서 영향 받는 entity·티켓·매뉴얼·담당자가 한 번에 traversal.
+      이 9단계는 <strong>학술 온톨로지가 아닌 운영 모델링</strong>. 회사 도메인을 AI가 이해할 수 있게 노드·관계로 정리하면, MCP tool 호출 시 의미 layer가 자동 합류 | "강남역 매장 결제 실패" 한 줄에서 영향 받는 entity·티켓·매뉴얼·담당자가 한 번에 traversal.
     </div>
 
     <div class="check-list">
